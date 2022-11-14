@@ -472,10 +472,10 @@ def remove_from_cart(request, id):
             order_item = Cart.objects.filter(item=item, user=request.user, purchase=False)[0]
             order.orderitems.remove(order_item)
             order_item.delete()
-            messages.warning(request, "This course was removed")
+            messages.warning(request, "you unenrolled this course")
             return redirect("cart")
         else:
-            messages.info(request, "This item was not in your cart")
+            messages.info(request, "you have not enrolled this course")
             return redirect("cart")
     else:
         messages.info(request,"You are not enrolled in any courses")

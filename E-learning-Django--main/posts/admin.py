@@ -51,7 +51,7 @@ admin.site.register(Category)
 
 admin.site.register(MainCourse)
 admin.site.register(enrolledstudents)
-admin.site.register(Cart)
+
 admin.site.register(Order, OrderAdmin)
 admin.site.register(passedstudents)
 admin.site.register(subcat)

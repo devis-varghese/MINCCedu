@@ -22,7 +22,7 @@
                                 <th scope="row">{{forloop.counter}})</th>
                                 <td>{{i.item.title}}</td>
                                 <td>Rs. {{i.item.price}}</td>
-                                <td><a href="{% url 'removecart' i.item.id %}"><i class="fa fa-window-close" aria-hidden="true"></i></a></td>
+                                <td><a href="{% url 'removecart' i.item.id %}">Unenroll</a></td>
                             </tr>
                         {% endfor %}    
                             <tr>
