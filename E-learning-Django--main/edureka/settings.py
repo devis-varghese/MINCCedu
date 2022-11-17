@@ -76,7 +76,7 @@ TEMPLATES = [
                 'posts.context_processors.cart_total',
                 'posts.context_processors.morecat',
                 'posts.context_processors.disc',
-                'posts.context_processors.ribbon',
+
             ],
         },
     },

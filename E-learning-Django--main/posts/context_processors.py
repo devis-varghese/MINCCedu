@@ -28,9 +28,9 @@ def morecat(request):
 
 def disc(request):
     disc_cat = Category.objects.all().filter(disc=True)
-    disc_blog = blog.objects.all().filter(disc=True)
+
     disc_post = Post.objects.all().filter(disc=True)
-    return dict(disc_cat=disc_cat, disc_blog=disc_blog, disc_post=disc_post)
+    return dict(disc_cat=disc_cat, disc_post=disc_post)
 
 # def get_course_time(request, slug):
 #     getpost = get_object_or_404(Post, slug=slug)
@@ -38,6 +38,3 @@ def disc(request):
 #     gettime = timing.objects.filter(Post=allpost)
 #     return dict(getpost=getpost, gettime=gettime)
 
-def ribbon(request):
-    off = offers.objects.filter(active=True)
-    return dict(off=off)

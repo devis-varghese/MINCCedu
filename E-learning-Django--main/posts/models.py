@@ -59,11 +59,11 @@ class Category(models.Model):
 
     class Meta:
         #enforcing that there can not be two categories under a parent with same slug
-        
+
         # __str__ method elaborated later in post.  use __unicode__ in place of
 
-        unique_together = ('slug', 'parent',)    
-        verbose_name_plural = "categories"     
+        unique_together = ('slug', 'parent',)
+        verbose_name_plural = "categories"
 
     def __str__(self):                           
         full_path = [self.title]                  
@@ -128,109 +128,25 @@ class Post(models.Model):
     slider_post = models.BooleanField(default=False, blank=True)
     maincourse = models.ManyToManyField(MainCourse, blank=True, related_name='posts')
     price = models.IntegerField(default=0)
-
-
-
-
-
-
     disc = models.BooleanField(default=False, verbose_name='Add In Disclaimer')
     
     def __str__(self):
         return self.title    
         
-    def get_rating(self):
-        total = sum(int(review['stars']) for review in self.review.values() )
 
-        return total / self.reviews.count()
-
-    # def save(self, *args, **kwargs):
-    #     if not self.id:
-    #         self.image = self.compressImage(self.image)
-    #     super(Upload, self).save(*args, **kwargs)
-    
-    # def compressImage(self,image):
-    #     imageTemproary = Image.open(image)
-    #     outputIoStream = BytesIO()
-    #     imageTemproaryResized = imageTemproary.resize( (1300,400) ) 
-    #     imageTemproary.save(outputIoStream , format='JPEG', quality=60)
-    #     outputIoStream.seek(0)
-    #     image = InMemoryUploadedFile(outputIoStream,'ImageField', "%s.jpg" % image.name.split('.')[0], 'image/jpeg', sys.getsizeof(outputIoStream), None)
-    #     return image    
-
-class blog(models.Model):
-    title = models.CharField(max_length=70)
-    meta_tags = models.CharField(max_length=2000, blank=True)
-    meta_desc = models.TextField(max_length=2000, blank=True)
-    slug = AutoSlugField(populate_from='title', unique=True, null=False, editable=True)
-    image = models.ImageField(upload_to='media/blog')
-    image_alt_name = models.CharField(max_length=200, blank=True)
-    desc = RichTextField(blank=True, null=True)
-    author = models.CharField(max_length=20, default="admin" )
-    date = models.DateTimeField(auto_now_add=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1, related_name="blog")
-    hit = models.PositiveIntegerField(default=0) #This field is for popular posts
-    disc = models.BooleanField(default=False, verbose_name='Add In Disclaimer')
-    
-    def __str__(self):
-        return self.title    
-        
-    def get_rating(self):
-        total = sum(int(review['stars']) for review in self.review.values() )
-
-        return total / self.reviews.count()
-
-class blankpage(models.Model):      
-    title = models.CharField(max_length=70)
-    meta_tags = models.CharField(max_length=2000, blank=True)
-    meta_desc = models.TextField(max_length=2000, blank=True)
-    slug = AutoSlugField(populate_from='title', unique=True, null=False, editable=True)
-    image = models.ImageField(upload_to='media/blog')
-    image_alt_name = models.CharField(max_length=200, blank=True)
-    desc = RichTextField(blank=True, null=True)
-    author = models.CharField(max_length=20, default="admin" )
-    date = models.DateTimeField(auto_now_add=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1, related_name="blank")
-    hit = models.PositiveIntegerField(default=0) #This field is for popular posts
-    disc = models.BooleanField(default=False, verbose_name='Add In Disclaimer')
-    
-    def __str__(self):
-        return self.title    
-        
-    def get_rating(self):
-        total = sum(int(review['stars']) for review in self.review.values() )
-
-        return total / self.reviews.count()
-
-class Curriculam(models.Model):    
+class Curriculam(models.Model):
     title = models.CharField(max_length=500)
     Post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='acc_posts')
     content = RichTextField(blank=True, null=True)
 
-#Terms and Condition for blogs
-class tcforblog(models.Model):    
-    title = models.CharField(max_length=500)
-    blank_page = models.ForeignKey(blankpage, on_delete=models.CASCADE, related_name='tc_blank_page', blank=True, null=True)
-    content = RichTextField(blank=True, null=True)
-
-class faq(models.Model):    
-    title = models.CharField(max_length=500)
-    Post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='faq_posts')
-    content = RichTextField(blank=True, null=True)
-
-class timing(models.Model):    
+class timing(models.Model):
     date = models.CharField(max_length=100, blank=True, null=True)
     day_duration = models.CharField(max_length=100, blank=True, null=True)
     time_duration1 = models.CharField(max_length=100, blank=True, null=True)
 
     Post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='time_posts')
 
-class Certificate(models.Model):
-    file = models.FileField(upload_to='media/certificate', null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    Post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='cert_posts')
-
-class features(models.Model):    
+class features(models.Model):
     title = models.CharField(max_length=500)
     Post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='feature_posts')
     content = RichTextField(blank=True, null=True)
@@ -242,36 +158,6 @@ class boxes_three(models.Model):
 
     def __str__(self):
         return self.title    
-
-class Comment(models.Model):
-    post = models.ForeignKey(Post,on_delete=models.CASCADE,related_name='comments')
-    name = models.CharField(max_length=80)
-    email = models.EmailField()
-    body = models.TextField()
-    user = models.ForeignKey(
-        User, 
-        on_delete=models.CASCADE, 
-        related_name='comments'
-    )
-    created_on = models.DateTimeField(auto_now_add=True)
-    active = models.BooleanField(default=False)
-
-    class Meta:
-        ordering = ['created_on']
-
-    def __str__(self):
-        return 'Comment {} by {}'.format(self.body, self.name)    
-
-class promocode(models.Model):
-    code = models.CharField(max_length=50, unique=True)
-    valid_from = models.DateTimeField()
-    valid_to = models.DateTimeField()
-    # discount = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
-    amount = models.FloatField()
-    active = models.BooleanField()
-
-    def __str__(self):
-        return self.code
 
 class Cart(models.Model):
     cart_id = models.CharField(max_length=500, blank=True)
@@ -299,13 +185,12 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     ordered = models.BooleanField(default=False)
     phone = models.CharField(max_length=10, null = False, default='0')
-    # coupon = models.ForeignKey(promocode, on_delete=models.SET_NULL, blank=True, null=True)
     total = models.DecimalField(max_digits=10, default=0, decimal_places=2, verbose_name='INR ORDER TOTAL')
     emailAddress = models.EmailField(max_length=250, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     payment_id = models.CharField(max_length=100, null=True)
     order_id =  models.CharField(max_length=100, null=True)
-
+    # client=order_id.client
     def get_totals(self):
         total = 0
         for order_item in self.orderitems.all():
@@ -314,12 +199,6 @@ class Order(models.Model):
         #     total -= self.coupon.amount
         return total
 
-class Reviews(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='reviews')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
-    content = models.TextField(blank=True, null=True)
-    stars = models.IntegerField()
-    created = models.DateTimeField(auto_now_add=True)
 
 class passedstudents(models.Model):
     image= models.ImageField(upload_to='media/clients',null=True,blank=True)
@@ -335,16 +214,3 @@ class video(models.Model):
     def __str__(self):
         return self.title
 
-class offers(models.Model):
-    off = models.CharField(max_length=100, verbose_name='Total Off') 
-    title = models.CharField(max_length=100, verbose_name='Title') 
-    subtitle = models.CharField(max_length=100, verbose_name='Sub Title') 
-    price = models.CharField(max_length=100, verbose_name='Price') 
-    desc = models.CharField(max_length=100, verbose_name='Description') 
-    button_text = models.CharField(max_length=100, verbose_name='Button Text') 
-    button_url = models.URLField(max_length=500, default='', verbose_name='Button Link')
-    small_desc = models.CharField(max_length=100, verbose_name='Small Description')
-    active = models.BooleanField(default=False, verbose_name="Status")
-
-    def __str__(self):
-        return self.title 

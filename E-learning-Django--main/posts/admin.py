@@ -10,14 +10,10 @@ class CuricullamAdmin(admin.StackedInline):
 class featuresAdmin(admin.StackedInline):
     model = features
 
-class faqAdmin(admin.StackedInline):
-    model = faq
 
 class timeAdmin(admin.StackedInline):
     model = timing
 
-class CertificateAdmin(admin.StackedInline):
-    model = Certificate
 
 class videoAdmin(admin.StackedInline):
     model = video
@@ -29,16 +25,8 @@ class PostAdmin(admin.ModelAdmin):
     class Meta:
        model = Post
 
-class tcblogAdmin(admin.StackedInline):
-    model = tcforblog
- 
-# @admin.register(blankpage)
-# class blankAdmin(admin.ModelAdmin):
-#     inlines = [tcblogAdmin]
-#
-#     class Meta:
-#        model = blankpage
- 
+
+
 @admin.register(Curriculam)
 class CuricullamAdmin(admin.ModelAdmin):
     pass

@@ -137,11 +137,6 @@ class videoform(forms.ModelForm):
         model = video
         fields = '__all__'
 
-class faqForm(forms.ModelForm):
-    
-    class Meta:
-        model = faq
-        fields = '__all__'
 
 class subcatg(forms.ModelForm):
     
@@ -149,29 +144,10 @@ class subcatg(forms.ModelForm):
         model = subcat
         fields = '__all__'
 
-class blogform(forms.ModelForm):
-    
-    class Meta:
-        model = blog
-        fields = '__all__'
 
-class blankform(forms.ModelForm):
-    
-    class Meta:
-        model = blankpage
-        fields = '__all__'
 
-class tcblog(forms.ModelForm):
-    
-    class Meta:
-        model = tcforblog
-        fields = '__all__'
 
-class promoform(forms.Form):
-    code = forms.CharField(widget=forms.TextInput(attrs={
-        'class':'form-control',
-        'placeholder':'Enter Promo Code',    
-    }))
+
     
 class leftmenu(forms.ModelForm):
     class Meta:
@@ -181,18 +157,14 @@ class leftmenu(forms.ModelForm):
 class middlemenu(forms.ModelForm):
     class Meta:
         model = Category
-        exclude = ['parent', 'top_three_cat', 'logo1', 'logo2']    
+        exclude = ['parent', 'top_three_cat', 'logo1', 'logo2']
 
 class rightmenu(forms.ModelForm):
     class Meta:
         model = Category
-        exclude = ['parent', 'more', 'logo1', 'logo2']    
+        exclude = ['parent', 'more', 'logo1', 'logo2']
 
-class admin_reviewsform(forms.ModelForm):
 
-    class Meta:
-        model = Reviews
-        fields = '__all__'          
 
 class checkoutform(forms.Form):
     mobile = forms.IntegerField()        
@@ -223,8 +195,5 @@ class approve_certForm(forms.ModelForm):
     #     fields = '__all__'
     #     exclude = ['wp']
     #
-class ribbonform(forms.ModelForm):
 
-    class Meta:
-        model = offers
-        fields = '__all__'
+

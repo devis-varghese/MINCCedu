@@ -46,11 +46,11 @@ def home(request):
     latest_catg = Category.objects.filter(parent=None)[:5]
     latest_catg_all = Category.objects.filter(parent=None)[5:]
     latest_post = Post.objects.order_by('-date')[:4]
-    rev = Reviews.objects.all().order_by('-created')[:6]
+    # rev = Reviews.objects.all().order_by('-created')[:6]
     context = {'allposts':allposts, 'main_course':main_course, 'top_three_catg':top_three_catg, 'catg':catg, 'slider_post':slider_post, 'latest_catg':latest_catg, 'latest_post':latest_post, 'totalposts':totalposts, 
     
     # 'catg_parent':catg_parent,
-     'allcat':allcat, 'categories':categories, 'footcategories':footcategories, 'rev':rev, 'latest_catg_all':latest_catg_all}
+     'allcat':allcat, 'categories':categories, 'footcategories':footcategories, 'latest_catg_all':latest_catg_all}
     return render(request, 'core/index.html', context)
 
 def totalposts(request):
@@ -73,7 +73,7 @@ def post_by_category(request, catslug):
     latest_catg = Category.objects.filter(parent=None)[:5]
     latest_post = Post.objects.order_by('-date')[:4]
     latest_catg_all = Category.objects.filter(parent=None)[5:]
-    rev = Reviews.objects.all().order_by('-created')[:6]
+    # rev = Reviews.objects.all().order_by('-created')[:6]
     context = {'latest_catg_all':latest_catg_all, 'rev':rev, 'posts':posts, 'cat_post':cat_post,'allposts':allposts, 'main_course':main_course, 'top_three_catg':top_three_catg, 'catg':catg, 'slider_post':slider_post, 'latest_catg':latest_catg, 'latest_post':latest_post}
     return render(request, 'core/index.html', context)
 
@@ -104,21 +104,20 @@ def post_details(request, category_slug, slug):
     curriculam = Curriculam.objects.filter(Post=allpost)
     #for class features
     feature = features.objects.filter(Post=allpost)
-    #for frequently asked questions
-    faqs = faq.objects.filter(Post=allpost)
+
     #for Timing
     time = timing.objects.filter(Post=allpost)    
     #for Videos
     vid = video.objects.filter(post=allpost)    
     #for Reviews
-    if request.method == 'POST' and request.user.is_authenticated:
-        allstars = request.POST.get('stars', 1)
-        allcontent = request.POST.get('content', '')
-        review = Reviews.objects.create(post=allpost, user=request.user, stars=allstars, content=allcontent)
-        return redirect('home')        
-    reviews = Reviews.objects.filter(post=allpost)    
+    # if request.method == 'POST' and request.user.is_authenticated:
+    #     allstars = request.POST.get('stars', 1)
+    #     allcontent = request.POST.get('content', '')
+    #     review = Reviews.objects.create(post=allpost, user=request.user, stars=allstars, content=allcontent)
+    #     return redirect('home')
+    # reviews = Reviews.objects.filter(post=allpost)
 
-    context = {'posts':posts, 'category':category, 'allcat':allcat, 'catg_parent':catg_parent, 'curriculam':curriculam, 'allpost':allpost, 'reviews':reviews, 'features':feature, 'faqs':faqs, 'time':time, 'videos':vid}
+    context = {'posts':posts, 'category':category, 'allcat':allcat, 'catg_parent':catg_parent, 'curriculam':curriculam, 'allpost':allpost,'features':feature, 'time':time, 'videos':vid}
     return render(request, 'core/details.html', context)
 
 def search(request):
@@ -131,58 +130,13 @@ def search(request):
 def videos(request):
     return render(request, 'core/videos.html')
 
-def blogs(request):
-    categories = Category.objects.all().filter(top_three_cat=False).filter(more=False).order_by('-created_at')
-    recent_blogs = blog.objects.all().order_by('-date')
-    context = {'categories':categories, 'recent_blogs':recent_blogs}
-    return render(request, 'core/blog.html', context) 
-
-def blog_catposts(request, blogcatslug):
-    blogpost = blog.objects.filter(category__slug=blogcatslug)
-    context = {'blogpost':blogpost}
-    return render(request, 'core/blogcatpost.html', context)
-
-def blogdetails(request, detslug):
-    blogs = blog.objects.filter(slug=detslug).first()
-    context = {'blogs':blogs}
-    return render(request, 'core/blogdetails.html', context)  
-
 def courses(request):
     main_course = MainCourse.objects.all()
     context = {'main_course':main_course}
     return render(request, 'core/courses.html', context)
 
-def blank_page(request, slug):
-    blank = blankpage.objects.filter(slug=slug).first()
-    allblank = get_object_or_404(blankpage, slug=slug)
-    #for add t&c 
-    tc = tcforblog.objects.filter(blank_page=allblank)
-    context = {'blank':blank, 'tc':tc}
-    return render(request, 'core/blankdetails.html', context)
 
-def getpromo(request, code):
-    try:
-        promo = promocode.objects.get(code=code)
-        return promo
-    except ObjectDoesNotExist:
-        messages.info(request, 'This coupon is not available')
-        return redirect('home')
 
-def add_promo(request, code):
-    if request.method == "POST":
-        form = promoform(request.POST or None)
-        if form.is_valid():
-            try:
-                code = form.cleaned_data.get('code')
-                order= Order.objects.get(user=request.user, ordered=False)        
-                order.coupon = getpromo(request, code)
-                order.save()
-                messages.success(request, 'Coupon is added !!')
-                return redirect('home')
-
-            except ObjectDoesNotExist:
-                messages.info(request, 'This coupon is not available')
-                return redirect('home')
 
 @csrf_exempt
 def verify_payment(request):
@@ -397,7 +351,7 @@ def checkout(request):
     if action == 'create_payment':
         amount = int(order.get_totals() * 100)
         currency = "INR"
-        receipt = f"inetsoftware.org-{int(time())}"
+        receipt = f"MINCC-{int(time())}"
         notes = {
                 "email": user.email,
                 "name": f'{user.first_name} {user.last_name}'
@@ -413,7 +367,7 @@ def checkout(request):
         order_payment = orders[0]
         order_payment.user = user
         order_payment.emailAddress = user.email
-        order_payment.coupon = order.coupon
+        # order_payment.coupon = order.coupon
         order_payment.order_id = orderss.get('id')
         order_payment.total = orderss.get('amount')
         order_payment.save()
@@ -421,29 +375,8 @@ def checkout(request):
     return render(request, 'core/checkout.html', context)
 
 
-def get_coupon(request, code):
-    try:
-        promo = promocode.objects.get(code=code)
-        return promo
-    except ObjectDoesNotExist:
-        messages.info(request, 'This promocode does not exist')
-        return redirect('checkout')
 
-def add_coupon(request):
-    if request.method == 'POST':
-        form = CouponForm(request.POST or None)
-        if form.is_valid():    
-            try:
-                code = form.cleaned_data.get('code')
-                orders = Order.objects.get(user=request.user, ordered=False)
-                orders.coupon = get_coupon(request, code)
-                orders.save()
-                messages.success(request, "Successfully Promocode is Added !!")
-                return redirect('checkout')
-            except ObjectDoesNotExist:
-                messages.info(request, 'You do not have an active order')
-                return redirect('checkout')
-    return None
+
 
 @login_required
 def cart_view(request):
@@ -606,19 +539,7 @@ def allorders(request):
     }
     return render(request, 'webadmin/allorders.html', context)
 
-def approve_certificates(request, id):
-    if request.method == 'POST':
-        carts = Cart.objects.get(id=id)
-        approve_cert= approve_certForm(request.POST or None, request.FILES or None, instance=carts)
-        if approve_cert.is_valid():
-            approve_cert.save()
-        messages.success(request, "Certificate Is Enable !!")
-        return redirect('allorders')
-    else:
-        carts = Cart.objects.get(id=id)
-        approve_cert= approve_certForm(instance=carts)
 
-    return render(request, "webadmin/editcarts.html", {'editcarts':approve_cert})
     
 #This is for show all Categories in Custom Admin Panel
 def allcat(request):
@@ -700,27 +621,8 @@ def delete_course(request, id):
     messages.success(request, "MainCourse Deleted Successfully.")
     return redirect('allcourses')    
 
-def render_to_pdf(template_src, context_dict):
-    template = get_template(template_src)
-    html  = template.render(context_dict)
-    result = io.BytesIO()
-    pdf = pisa.pisaDocument(io.BytesIO(html.encode("ISO-8859-1")), result)
-    if not pdf.err:
-        return HttpResponse(result.getvalue(), content_type='application/pdf')
-    return
 
     
-def usercertificate(request, category_slug, slug):
-    posts = Post.objects.filter(slug=slug).first()
-    category = Post.objects.filter(slug=category_slug)
-    carts = Cart.objects.filter(user=request.user, purchase=False)
-    orders = Order.objects.filter(user=request.user, ordered=False)
-    if carts.exists() and orders.exists():
-        order = orders[0]
-        return render_to_pdf('users/certificate.html',{'customerName':request.user.first_name,'customerNamelast':request.user.last_name,
-        'customerEmail':request.user.email,'carts':carts,'order':order,'posts':posts})
-
-    return render_to_pdf('users/certificate.html', {'posts':posts})
 
 def add_videos(request):
     video= videoform()
@@ -763,40 +665,8 @@ def paid_video(request, slug):
     context = {'allpost':allpost, 'vid':vid}
     return render(request, 'users/video.html', context)
 
-def allfaq(request):
-    f = faq.objects.all()
-    context = {'f':f}
-    return render(request, 'webadmin/allfaq.html', context)
 
-def add_faq(request):
-    faq= faqForm()
-    if request.method=='POST':
-        faq= faqForm(request.POST, request.FILES)
-        if faq.is_valid():
-            faq.save()
-        messages.success(request, "faq Added Sucessfully !!")    
-        return redirect('allfaq')
-    return render(request, "webadmin/add_faq.html", {'faq':faq})
 
-def edit_faq(request, id):
-    if request.method == 'POST':
-        faqs = faq.objects.get(id=id)
-        EditfaqForm= faqForm(request.POST, instance=faqs)
-        if EditfaqForm.is_valid():
-            EditfaqForm.save()
-        messages.success(request, "FAQ Update Sucessfully !!")
-        return redirect('allfaq')
-    else:
-        faqs = faq.objects.get(id=id)
-        EditfaqForm= faqForm(instance=faqs)   
-
-    return render(request, "webadmin/editfaq.html", {'faqForm':EditfaqForm})
-
-def delete_faq(request, id):
-    delete = faq.objects.get(pk=id)  #pk means primary key
-    delete.delete()
-    messages.success(request, "faq Deleted Successfully.")
-    return redirect('allfaq') 
 
 def alltime(request):
     f = timing.objects.all()
@@ -938,111 +808,6 @@ def delete_subcatg(request, id):
     messages.success(request, "Subcat Deleted Successfully.")
     return redirect('allsubcatg') 
 
-def allblogs(request):
-    f = blog.objects.all()
-    context = {'f':f}
-    return render(request, 'webadmin/allblogs.html', context)
-
-def add_blogs(request):
-    blog= blogform()
-    if request.method=='POST':
-        blog= blogform(request.POST, request.FILES)
-        if blog.is_valid():
-            blog.save()
-        messages.success(request, "blog Added Sucessfully !!")    
-        return redirect('allblog')
-    return render(request, "webadmin/add_blog.html", {'blog':blog})
-
-def edit_blogs(request, id):
-    if request.method == 'POST':
-        blogs = blog.objects.get(id=id)
-        editblog = blogform(request.POST or None, request.FILES or None, instance=blogs)
-        if editblog.is_valid():
-            editblog.save()
-        messages.success(request, "Blog Update Sucessfully !!")
-        return redirect('allblog')
-    else:
-        blogs = blog.objects.get(id=id)
-        editblog = blogform(instance=blogs)   
-
-    return render(request, "webadmin/edit_blog.html", {'editblog':editblog })  
-
-def delete_blogs(request, id):
-    delete = blog.objects.get(pk=id)  #pk means primary key
-    delete.delete()
-    messages.success(request, "Blog Deleted Successfully.")
-    return redirect('allblog') 
-
-def allblank(request):
-    f = blankpage.objects.all()
-    context = {'f':f}
-    return render(request, 'webadmin/allblank.html', context)
-
-def add_blank(request):
-    blank= blankform()
-    if request.method=='POST':
-        blank= blankform(request.POST, request.FILES)
-        if blank.is_valid():
-            blank.save()
-        messages.success(request, "blank Added Sucessfully !!")    
-        return redirect('allblank')
-    return render(request, "webadmin/add_blank.html", {'blank':blank})
-
-def edit_blank(request, id):
-    if request.method == 'POST':
-        blank = blankpage.objects.get(id=id)
-        editblank = blankform(request.POST or None, request.FILES or None, instance=blank)
-        if editblank.is_valid():
-            editblank.save()
-        messages.success(request, "Blank Page Update Sucessfully !!")
-        return redirect('allblank')
-    else:
-        blank = blankpage.objects.get(id=id)
-        editblank = blankform(instance=blank)   
-
-    return render(request, "webadmin/edit_blank.html", {'editblank':editblank })  
-
-def delete_blank(request, id):
-    delete = blankpage.objects.get(pk=id)  #pk means primary key
-    delete.delete()
-    messages.success(request, "Blank Deleted Successfully.")
-    return redirect('allblank') 
-
-def alltc(request):
-    f = tcforblog.objects.all()
-    context = {'f':f}
-    return render(request, 'webadmin/alltc.html', context)
-
-def add_tc(request):
-    tc= tcblog()
-    if request.method=='POST':
-        tc= tcblog(request.POST, request.FILES)
-        if tc.is_valid():
-            tc.save()
-        messages.success(request, "tc Added Sucessfully !!")    
-        return redirect('alltc')
-    return render(request, "webadmin/add_tc.html", {'tc':tc})
-
-def edit_tc(request, id):
-    if request.method == 'POST':
-        tcs = tcforblog.objects.get(id=id)
-        Edittcblog= tcblog(request.POST, instance=tcs)
-        if Edittcblog.is_valid():
-            Edittcblog.save()
-        messages.success(request, "tc Update Sucessfully !!")
-        return redirect('alltc')
-    else:
-        tcs = tcforblog.objects.get(id=id)
-        Edittcblog= tcblog(instance=tcs)   
-
-    return render(request, "webadmin/edittc.html", {'tcblog':Edittcblog})
-
-def delete_tc(request, id):
-    delete = tcforblog.objects.get(pk=id)  #pk means primary key
-    delete.delete()
-    messages.success(request, "tc Deleted Successfully.")
-    return redirect('alltc')     
-
 def add_leftcat(request):
     category= leftmenu()
     if request.method=='POST':
@@ -1127,73 +892,3 @@ def edit_rightcat(request, id):
 
     return render(request, "webadmin/editrightcat.html", {'editcat':editcatForm})
 
-def admin_reviews(request):
-    review= admin_reviewsform()
-    if request.method=='POST':
-        review = admin_reviewsform(request.POST, request.FILES)
-        if review.is_valid():
-            review.save()
-        messages.success(request, "Review Added Sucessfully !!")    
-        return redirect('alladmin_review')
-    return render(request, "webadmin/add_reviews.html", {'review':review})
-
-def delete_admin_review(request, id):
-    delete = Reviews.objects.get(pk=id)  #pk means primary key
-    delete.delete()
-    messages.success(request, "Admin Review Deleted Successfully.")
-    return redirect('alladmin_review')   
-
-def edit_admin_review(request, id):
-    if request.method == 'POST':
-        review = Reviews.objects.get(id=id)
-        edit_admin_reviews = admin_reviewsform(request.POST, instance=review)
-        if edit_admin_reviews .is_valid():
-            edit_admin_reviews .save()
-        messages.success(request, "Reviews Update Sucessfully !!")
-        return redirect('alladmin_review')
-    else:
-        faqs = Reviews.objects.get(id=id)
-        edit_admin_reviews = admin_reviewsform(instance=faqs)
-
-    return render(request, "webadmin/edit_admin_reviews.html", {'edit':edit_admin_reviews })    
-
-def alladmin_review(request):
-    review = Reviews.objects.all()
-    context = {'review':review}
-    return render(request, 'webadmin/all_reviews.html', context)    
-
-# def allribbon(request):
-#     ribbon = offers.objects.all()
-#     context = {'ribbon':ribbon}
-#     return render(request, 'webadmin/allribbon.html', context)
-#
-# def add_ribbon(request):
-#     ribbon= ribbonform()
-#     if request.method=='POST':
-#         ribbon = ribbonform(request.POST, request.FILES)
-#         if ribbon.is_valid():
-#             ribbon.save()
-#         messages.success(request, "Offers Added Sucessfully !!")
-#         return redirect('allribbon')
-#     return render(request, "webadmin/add_ribbon.html", {'add':ribbon})
-#
-# def delete_ribbon(request, id):
-#     delete = offers.objects.get(pk=id)  #pk means primary key
-#     delete.delete()
-#     messages.success(request, "Offer Deleted Successfully.")
-#     return redirect('allribbon')
-#
-# def edit_ribbon(request, id):
-#     if request.method == 'POST':
-#         ribbon = offers.objects.get(id=id)
-#         ribbon = ribbonform(request.POST, instance=ribbon)
-#         if ribbon.is_valid():
-#             ribbon.save()
-#         messages.success(request, "Offer Update Sucessfully !!")
-#         return redirect('allribbon')
-#     else:
-#         ribbon = offers.objects.get(id=id)
-#         ribbon = ribbonform(instance=ribbon)
-#
-#     return render(request, "webadmin/edit_ribbon.html", {'edit':ribbon })
-#
