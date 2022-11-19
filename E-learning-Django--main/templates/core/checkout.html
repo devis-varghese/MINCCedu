@@ -89,20 +89,20 @@
     {% if orderss is not None %}
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
  <script>
- var options = 
+ var options =
  {    
- "key": "rzp_test_CdqHewXL5K1AYq", 
+ "key": "rzp_test_CdqHewXL5K1AYq",
  "name": "MINCC",
  {% for i in orders %}
  {% for obj in i.orderitems.all %}    
  "description": "Payment For {{obj.item.title|title}}",    
  {% endfor %}
  {% endfor %}
- "image": "{% static 'images/logo.png' %}",    
+ "image": "{% static 'images/logo.png' %}",
  "order_id": "{{orderss.id}}",
  "callback_url": "http://127.0.0.1:3000/verify_payment/",
  "prefill": { "name": "{{request.user.first_name}} {{request.user.last_name}}",
- "email": "{{request.user.username}}",        
+ "email": "{{request.user.username}}",
  "contact": "{{request.user.mobile}}"    
     },      
     "theme": {        
@@ -110,7 +110,7 @@
         }
         };
 var rzp1 = new Razorpay(options);
-rzp1.open();   
+rzp1.open();
 </script>
 
 {% endif %}

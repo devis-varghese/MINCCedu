@@ -27,10 +27,10 @@
           <span class="iconcall">
             <i class="fa fa-phne" aria-hidden="true"></i>
           </span>
-<!--          <div class="cnt_info">-->
-<!--            <span class="text">Have Queries? Ask us</span>-->
-<!--            <a href="#">08040423753</a>-->
-<!--          </div>-->
+          <div class="cnt_info">
+            <span class="text">Contact if you have any queries</span>
+            <a href="#">9961403501</a>
+          </div>
         </div>
       </div>
     </div>
@@ -43,14 +43,7 @@
     <div class="row">
       <div class="col-md-4">
         <div class="panel-box">
-          <iframe
-            width="100%"
-            height="200"
-            src="{{posts.youtube}}"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-          ></iframe>
+          <img src="{{post.Image.url}}"  style="width:255px; height:130px;">
         </div>
       </div>
 
@@ -58,49 +51,12 @@
         <div class="blurb_bx">
           <div style="text-align: justify">{{posts.desc|safe}}</div>
         </div>
-       <!-- <div class="course_rating_user">
-          <span class="cour_reviewicons">
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-            <i class="fa fa-star" aria-hidden="true"></i>
-          </span>
-&lt;!&ndash;          <span class="lrner_cnt"> <span>87k</span> + satisfied learners </span>&ndash;&gt;
-&lt;!&ndash;          <span class="red_rivw ga-click"> Read Reviews </span>&ndash;&gt;
-        </div>-->
+
       </div>
     </div>
   </div>
 </section>
-<!------AWS-Architect pb-5----------- -->
-<!--<section class="AWS-Architect pb-5">
-  <div class="container">
-    <h2>{{posts.why_title}}</h2>
-    <div class="row">
-      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 take_the_course_bx">
-        <div class="box_one_img">
-          <img src="{% static 'images/download.png' %}" />
-        </div>
-        <span> {{posts.why1|safe}}</span>
-      </div>
 
-      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 take_the_course_bx">
-        <div class="box_one_img">
-          <img src="{% static 'images/download.png' %}" />
-        </div>
-        <span> {{posts.why2|safe}}</span>
-      </div>
-
-      <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 take_the_course_bx">
-        <div class="box_one_img">
-          <img src="{% static 'images/download.png' %}" />
-        </div>
-        <span> {{posts.why3|safe}}</span>
-      </div>
-    </div>
-  </div>
-</section>-->
 <div class="navigation-wrap bg-light start-header start-style">
   <div class="container">
     <div class="row">
@@ -120,30 +76,7 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto py-4 py-md-0">
-              <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                <a class="nav-link" href="#">Upcoming Batches</a>
-              </li>
-              <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                <a class="nav-link" href="#">Curriculum</a>
-              </li>
-              <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                <a class="nav-link" href="#">Course Details</a>
-              </li>
-              <!--<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                <a class="nav-link" href="#">Certification</a>
-              </li>
-              <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                <a class="nav-link" href="#">Reviews</a>
-              </li>
-              <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                <a class="nav-link" href="#">Projects</a>
-              </li>
-              <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                <a class="nav-link" href="#">Features</a>
-              </li>
-              <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                <a class="nav-link" href="#">FAQs</a>
-              </li>-->
+
             </ul>
           </div>
         </nav>
@@ -151,12 +84,9 @@
     </div>
   </div>
 </div>
-<!----clp_batch_table ------>
-<section class="container-flud clp_batch_table blue_gradient_background">
+
   <div class="container">
-<!--    <h2 class="title_box_heading mb-4">-->
-<!--      Instructor-led AWS Architect live online classes-->
-<!--    </h2>-->
+
     <div class="row sub_content_bx">
       <div class="col-md-9 no-padding box_heading_section">
         <div class="table-starts">
@@ -164,13 +94,7 @@
             <table class="table">
               <thead>
                 {% comment %}
-<!--                <tr>-->
-<!--                  <th scope="col">Nov 30th</th>-->
-<!--                  <th scope="col">MON-FRI (15 Days)</th>-->
-<!--                  <th scope="col">-->
-<!--                    Sold Out Timings - 08:30 PM to 10:30 PM (IST)-->
-<!--                  </th>-->
-<!--                </tr>-->
+
                 {% endcomment %}
               </thead>
               <tbody>
@@ -178,7 +102,7 @@
                 <tr>
                   <th scope="row">{{i.date}}</th>
                   <td>{{i.day_duration}}</td>
-                  <td>FILLING {{i.time_duration1}}-{{i.time_duration2}}</td>
+                  <td> {{i.time_duration1}}-{{i.time_duration2}}</td>
                 </tr>
                 {% endfor %} {% comment %}
                 <tr>
@@ -300,7 +224,7 @@
         <div class="Accordion-main">
           <div class="container mt-10">
             <div class="col-md-12">
-              <h2 class="title_box_heading mb-4">{{posts.title}} Curriculum</h2>
+              <h2 class="title_box_heading mb-4">Curriculum</h2>
               <div
                 class="panel-group"
                 id="accordion2"

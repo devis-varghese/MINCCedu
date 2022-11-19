@@ -190,6 +190,8 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     payment_id = models.CharField(max_length=100, null=True)
     order_id =  models.CharField(max_length=100, null=True)
+
+    # objects = models.Manager()
     # client=order_id.client
     def get_totals(self):
         total = 0

@@ -104,18 +104,10 @@ def post_details(request, category_slug, slug):
     curriculam = Curriculam.objects.filter(Post=allpost)
     #for class features
     feature = features.objects.filter(Post=allpost)
-
     #for Timing
     time = timing.objects.filter(Post=allpost)    
     #for Videos
-    vid = video.objects.filter(post=allpost)    
-    #for Reviews
-    # if request.method == 'POST' and request.user.is_authenticated:
-    #     allstars = request.POST.get('stars', 1)
-    #     allcontent = request.POST.get('content', '')
-    #     review = Reviews.objects.create(post=allpost, user=request.user, stars=allstars, content=allcontent)
-    #     return redirect('home')
-    # reviews = Reviews.objects.filter(post=allpost)
+    vid = video.objects.filter(post=allpost)
 
     context = {'posts':posts, 'category':category, 'allcat':allcat, 'catg_parent':catg_parent, 'curriculam':curriculam, 'allpost':allpost,'features':feature, 'time':time, 'videos':vid}
     return render(request, 'core/details.html', context)
@@ -123,7 +115,6 @@ def post_details(request, category_slug, slug):
 def search(request):
     search = request.GET['search']
     totalposts = Post.objects.filter(title__icontains=search)
-    # allpostcontent = Post.objects.filter(desc__icontains=search)
     context = {'totalposts':totalposts, 'search':search}
     return render(request, 'core/search.html', context)
 
@@ -425,48 +416,7 @@ def webadmin(request):
     return render(request, 'webadmin/index.html', context)  
 
 
-# def add_post(request):
-#     post= PostForm()
-#     faq = faqform()
-#     curriculam = Curriculamform()
-#     features = featuresform()
-#     if request.method=='POST':
-#         post = PostForm(request.POST, request.FILES)
-#         faq = [faqform(prefix=str(
-#                 x), instance=Post()) for x in range(7)]
-#         curriculam = Curriculamform(request.POST, request.FILES)
-#         features=featuresform(request.POST, request.FILES)
-#         if post.is_valid() and faq.is_valid() and curriculam.is_valid() and features.is_valid():
-#             post.save()
-#             faq.save()
-#             curriculam.save()
-#             features.save()
-#         messages.success(request, "post Added Sucessfully !!")    
-#         return redirect('allposts')
-#     return render(request, "webadmin/addpost.html", {'post':post, 'faq':faq, 'features':features, 'curriculam':curriculam})
 
-# def add_post(request):
-#     if request.method == 'POST':
-#         postform = PostForm(data=request.POST)
-#         faq_form = faqform(data=request.POST)
-#         curriculums_form = Curriculamform(data=request.POST)
-#         features_form = featuresform(data=request.POST)
-#         timing_form = timingform(data=request.POST)
-#         if faq_form.is_valid and curriculums_form.is_valid and features_form.is_valid and timing_form.is_valid:
-#             postform.save()
-#             faq_form.save()
-#             curriculums_form.save()
-#             features_form.save()
-#             timing_form.save()
-#             return HttpResponseRedirect(reverse('allposts'))
-#     else:
-#         postform = PostForm()
-#         faq_form = faqform()
-#         curriculums_form = Curriculamform()
-#         features_form = featuresform()
-#         timing_form = timingform()
-#     context = {"post":postform,"faq_form":faq_form, "curriculums_form": curriculums_form, "features_form":features_form,"timing_form" : timing_form}
-#     return render(request, 'webadmin/addpost.html', context)  
 
 def add_post(request):
     posts= PostForm()

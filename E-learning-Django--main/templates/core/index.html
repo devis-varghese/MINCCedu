@@ -85,7 +85,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 my-2">
-                    <h4 class="mt-4">All Trending Courses</h4>
+                    <h4 class="mt-4">All Featured Courses</h4>
                 </div>
             </div>
             <div class="row">
@@ -141,28 +141,12 @@
                                     <div class="user-data">
                                         <h3>{{i.title}}</h3>
                                     </div>
-                                    <!--<div class="star">
-                                       <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <span<i class="fa fa-star" aria-hidden="true"></i>
-                                        <i c>4.4 (5500)</span>
-                                    </div>-->
+
                                 </div>
                             </div>
-                         <!--   <div class="hover_display">
-                                <span class="batchtxt">Next batch</span>
-                                <span class="nextbatch">
-                 <span class="value">Today</span>
-                                <span class="text">- 7th December</span>
-                                </span>
-                                <span class="learnlist">What will I learn?</span>
-                                <ul>
-                                    <li>HAAD</li>
 
 
-                                </ul>-->
+                                </ul>
                                 <span class="seemorebtn">View Details</span>
                             </div>
                         </div>
@@ -181,28 +165,11 @@
                                     <div class="user-data">
                                         <h3>{{i.title}}</h3>
                                     </div>
-                                    <div class="star">
-<!--                                        <i class="fa fa-star" aria-hidden="true"></i>-->
-<!--                                        <i class="fa fa-star" aria-hidden="true"></i>-->
-<!--                                        <i class="fa fa-star" aria-hidden="true"></i>-->
-<!--                                        <i class="fa fa-star" aria-hidden="true"></i>-->
-<!--                                        <i class="fa fa-star" aria-hidden="true"></i>-->
-<!--                                        <span>4.4 (5500)</span>-->
-                                    </div>
+
                                 </div>
                             </div>
                             <div class="hover_display">
-<!--                                <span class="batchtxt">Next batch</span>-->
-<!--                                <span class="nextbatch">-->
-<!--                 <span class="value">Today</span>-->
-<!--                                <span class="text">- 7th December</span>-->
-<!--                                </span>-->
-<!--                                <span class="learnlist">What will I learn?</span>-->
-<!--                                <ul>-->
-<!--                                    <li>Introduction to AWS</li>-->
-<!--                                    <li>Security Management in AWS</li>-->
-<!--                                    <li>Object Storage Options</li>-->
-<!--                                </ul>-->
+
                                 <span class="seemorebtn">View Details</span>
                             </div>
                         </div>
@@ -217,53 +184,7 @@
         </div>
     </section>
 
-    <!--- career-section - -->
-    <!--<section class="Career mt-4 mb-4">
-        <div class="container">
-            <div class="row">
-                {% for i in main_course %}
-                <h2 class="mb-4">{{i.title}}</h2>
-                {% for obj in i.posts.all %}
-                <div class="col-md-3 mt-4">
-                    <a href="{% url 'details' obj.category.slug obj.slug %}" style="color: black;">
-                        <div class="main-hover-div">
-                            <div class="box-main">
-                                <div class="">
-                                    <img src="{{obj.image.url}}" alt="{{obj.image_alt_name}}" style="width:255px; height:150px;">
-                                </div>
-                                <div class="main-career-2">
-                                    <h3>{{obj.title}}</h3>
-                                    <span>Reviews</span>
-                                    <div class="star">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <span>4.4 (5500)</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="hover_display" style="padding: 30px;">
-                                <span class="batchtxt">Next batch</span>
-                                <span class="nextbatch">
-                 <span class="value">Today</span>
-                                <span class="text">- 7th December</span>
-                                </span>
-                                <span class="learnlist">What will I learn?</span>
-                                <ul>
-                                    <li>Introduction to AWS</li>
-                                    <li>Security Management in AWS</li>
-                                    <li>Object Storage Options</li>
-                                </ul>
-                                <span class="seemorebtn">View Details</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                {% endfor %} {% endfor %}
-            </div>
-    </section>-->
+
     <!-----Recent Additions--- -->
     <section class="Recent-Addition">
         <div class="container">
@@ -281,28 +202,11 @@
                                     <div class="user-data">
                                         <h3>{{i.title}}</h3>
                                     </div>
-                                   <!-- <div class="star">
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <i class="fa fa-star" aria-hidden="true"></i>
-                                        <span>4.4 (5500)</span>
-                                    </div>-->
+
                                 </div>
                             </div>
                             <div class="hover_display">
-<!--                                <span class="batchtxt">Next batch</span>-->
-<!--                                <span class="nextbatch">-->
-<!--                 <span class="value">Today</span>-->
-<!--                                <span class="text">- 7th December</span>-->
-<!--                                </span>-->
-<!--                                <span class="learnlist">What will I learn?</span>-->
-<!--                                <ul>-->
-<!--                                    <li>Introduction to AWS</li>-->
-<!--                                    <li>Security Management in AWS</li>-->
-<!--                                    <li>Object Storage Options</li>-->
-<!--                                </ul>-->
+
                                 <span class="seemorebtn">View Details</span>
                             </div>
                         </div>
@@ -312,296 +216,10 @@
             </div>
         </div>
     </section>
-    <!---chhota-div---->
-  <!--  <section class="chhota-div">
-        <div class="container-fluid">
-            <div class="container">
-                <h2 class="mt-5 mb-4">Discover Top Categories</h2>
-                <div class="discover-top-categories">
-                    <ul class="less_element">
-                        {% for i in latest_catg %}
-                        <li class="category-item">
-                            <a href="#">
-                                <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                                <label>{{i.title|title}}</label>
-                            </a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <span class="more_button_cat">View More 
-      <i class="fa fa-angle-right" aria-hidden="true"></i>
-    </span>
-            </div>
-        </div>
-    </section>
--->
-    <!-----Reviews----- -->
-   <!-- <section class="Reviews">
-        <div class="container">
-            <h2 class="mb-5 mt-4">Reviews</h2>
-            <div class="row">
-                {% for i in rev %}
-              <div class="col-md-4">
-                    <div class="main-reviews">
-                    <div class="customer-pers-details">
-                        <span class="ssss">{{i.user.first_name|slice:":1"}}</span>
-                        <span class="Sujatha">{{i.user.first_name}}</span>
-                    </div>
-                    {% if i.stars == 1 %}
-                    <div class="star">
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                    {% elif i.stars == 2 %}
-                    <div class="star">
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                    {% elif i.stars == 3 %}
-                    <div class="star">
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                    {% elif i.stars == 4 %}
-                    <div class="star">
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                    {% elif i.stars == 5 %}
-                    <div class="star">
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                        <i class="fa fa-star" aria-hidden="true"></i>
-                    </div>
-                    {% endif %}
-                    <div class="bootstrap-read-more-section">
-                        <p class="italik">{{i.content}}</p>
-                    </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-            <span class="more_button_cat">VIEW ALL REVIEWS 
-      <i class="fa fa-angle-right" aria-hidden="true"></i>
-    </span>
-        </div>
-    </section>
--->
-    <!------home_all_course_strip--------->
-    <section class="home_all_course_strip mt-4 mb-4">
-        <div class="container">
-            <label>Enroll, Learn, Grow, Repeat! Get ready to achieve your learning goals with MINCC</label>
-            <a href="#">View All Courses</a>
-        </div>
-    </section>
 
-    <!---The Edureka Edge--- -->
-    <!--{% comment %} <section class="The-Edureka-Edge">
-        <div class="container">
-            <h2 class="mt-4 mb-4">The Edureka Edge</h2>
-            <div class="row text-center">
-                <div class="col-md-3">
-                    <div class="edu-images">
-                        <img src="{% static 'images/i1.jpg' %}" class="img-fluid" alt="Responsive image">
-                    </div>
-                    <div class="main-edu">
-                        <div class="edge-description">
-                            <label>
-                        <strong>Real Time Doubt Resolution</strong>
-                        <br>
-                      with Live Instructors
-                    </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="edu-images">
-                        <img src="{% static 'images/i2.jpg' %}" class="img-fluid" alt="Responsive image">
-                    </div>
-                    <div class="main-edu">
-                        <div class="edge-description">
-                            <label>
-                        <strong>Real Time Doubt Resolution</strong>
-                        <br>
-                      with Live Instructors
-                    </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="edu-images">
-                        <img src="{% static 'images/i3.jpg' %}" class="img-fluid" alt="Responsive image">
-                    </div>
-                    <div class="main-edu">
-                        <div class="edge-description">
-                            <label>
-                        <strong>Real Time Doubt Resolution</strong>
-                        <br>
-                      with Live Instructors
-                    </label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="edu-images">
-                        <img src="{% static 'images/i4.jpg' %}" class="img-fluid" alt="Responsive image">
-                    </div>
-                    <div class="main-edu">
-                        <div class="edge-description">
-                            <label>
-                        <strong>Real Time Doubt Resolution</strong>
-                        <br>
-                      with Live Instructors
-                    </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> {% endcomment %}
-
-    {% comment %} <section class="mini-slider mt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="slideshow-container">
-                    {% for i in totalposts %}
-                    {% if forloop.counter == 2 %}
-                        <div class="mySlides">
-                            <h3>{{i.title}}</h3>
-                            <a href="#">Read more</a><br>
-                            <img src="{{i.logo.url}}" class="img-fluid" alt="Responsive image" style="height: 70px;">
-                        </div>
-                    </div>
-                    {% endif %}
-                    {% endfor %}
-
-                    <a class="prev" onclick="plusSlides(-1)">❮</a>
-                    <a class="next" onclick="plusSlides(1)">❯</a>
-
-                    <div class="dot-container">
-                        <span class="dot" onclick="currentSlide(1)"></span>
-                        <span class="dot" onclick="currentSlide(2)"></span>
-                        <span class="dot" onclick="currentSlide(3)"></span>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section> {% endcomment %}
-
--->
-
-
-    <!-----our_corporate_clients---->
-    <!--<section class="our_corporate_clients">
-        <div class="container">
-            <div class="row">
-                <div class="main-corporate">
-                    <span class="client_title">Our Corporate Clients</span>
-                    <div class="client text-center">
-                        <ul>
-                            <li>
-                                <a href="#">
-                                    <img src="{% static 'images/c1.png' %}">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img src="{% static 'images/c2.png' %}">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img src="{% static 'images/c3.png' %}">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img src="{% static 'images/c4.png' %}">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img src="{% static 'images/c5.png' %}">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img src="{% static 'images/c6.png' %}">
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <img src="{% static 'images/c7.png' %}">
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>-->
     <!----footer-section------>
     {% include 'core/footer.html' %}
 
-    <!----CATEGORIES--- -->
-
-    <!----Drop-box-section----->
-    <!--<section class="Drop-box-section">
-        <div class="drop_box_enqr hidden-xs redShow" style="display: block;">
-            <div class="head dp_hd_bx duq-new-head totop" style="cursor: pointer;">
-                <div class="accordion" id="accordionExample">
-                    <div class="card">
-                        <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false">
-                            <span class="title" style="margin-left: -60px; font-size: 16px; ">Drop us a Query</span>
-                            <span class="accicon"><i class="fas fa-angle-down rotate-icon" style="margin-left: 78px; font-size: 20px;"></i></span>
-                        </div>
-                        <div id="collapseThree" class="collapse" data-parent="#accordionExample">
-                            <div class="card-body">
-                                <div class="mlp_talk_adverbox">
-                                    <div class="title_num">
-
-                                        <div class="num_box_adv mt-2">
-                                            <img src="images/telephone-symbol-button.png">
-                                            <div class="num_box_sub">
-                                                <p c>08068245835</p>
-                                                <p class="sub">Available 24x7 for your queries</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form_talk">
-                                        <form>
-                                            <div class="mb-3 mt-2">
-                                                <input type="Number" class="form-control" id="Number" name="Phone" placeholder="Mobile No*">
-                                            </div>
-                                            <div class="mb-3">
-                                                <input type="email" class="form-control" id="Email" placeholder="e.g. sara@gmail.com*">
-                                            </div>
-                                            <div class="form-group">
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Type your query here*"></textarea>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary">SUBMIT QUERY</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-    </section>-->
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -664,6 +282,12 @@
             </div>
         </div>
     </div>
+ <section class="home_all_course_strip mt-4 mb-4">
+        <div class="container">
+            <label>Enroll, Learn, Grow, Repeat! Get ready to achieve your learning goals with MINCC</label>
+            <a href="#">View All Courses</a>
+        </div>
+    </section>
     <!---Option 2: jQuery, Popper.js, and Bootstrap JS- -->
     <script
       src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
