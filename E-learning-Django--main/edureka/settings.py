@@ -92,10 +92,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        # 'NAME': 'edureka',
-        # 'USER': 'postgres',
-        # 'PASSWORD': 'Shivam123',
-        # 'HOST': 'edurekanet.herokuapp.com',
+
     }
 }
 
@@ -163,3 +160,6 @@ EMAIL_USE_TLS = True
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 #This above is very imp for the condition when debug=True, so please paste this file here
+
+RAZORPAY_API_KEY = 'rzp_test_oE5GrnJfzSUqCP'
+RAZORPAY_API_SECRET_KEY = 'xmxWct8JWngneVWqA3HtLCyZ'

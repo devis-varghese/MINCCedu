@@ -79,7 +79,7 @@
                             <br>
                             <div class="mx-auto">
                                 <a href="?action=create_payment" type="submit" style="color:#fff; font-weight:600;" class="btn btn-primary">Continue To Payment</a>
-                            </div>                                 
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -90,23 +90,23 @@
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
  <script>
  var options =
- {    
- "key": "rzp_test_CdqHewXL5K1AYq",
+ {
+ "key": "",
  "name": "MINCC",
  {% for i in orders %}
- {% for obj in i.orderitems.all %}    
- "description": "Payment For {{obj.item.title|title}}",    
+ {% for obj in i.orderitems.all %}
+ "description": "Payment For {{obj.item.title|title}}",
  {% endfor %}
  {% endfor %}
  "image": "{% static 'images/logo.png' %}",
  "order_id": "{{orderss.id}}",
- "callback_url": "http://127.0.0.1:3000/verify_payment/",
+ "callback_url": "",
  "prefill": { "name": "{{request.user.first_name}} {{request.user.last_name}}",
  "email": "{{request.user.username}}",
- "contact": "{{request.user.mobile}}"    
-    },      
-    "theme": {        
-        "color": "#3399cc"    
+ "contact": "{{request.user.mobile}}"
+    },
+    "theme": {
+        "color": "#3399cc"
         }
         };
 var rzp1 = new Razorpay(options);
