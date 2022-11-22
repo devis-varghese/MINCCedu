@@ -46,15 +46,13 @@
                         <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
                             <a class="nav-link" href="{% url 'all-courses' %}">Courses</a>
                         </li>
-                        <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                            <a class="nav-link" href="">Blog</a>
-                        </li>
+
                         {% if user.is_authenticated %}
                         <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                            <a class="nav-link" href="{% url 'userhome' %}">{{user.first_name}}</a>
+                            <a class="nav-link" href="{% url 'profile' %}">{{user.first_name}}</a>
                         </li>
                         <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-                            <a class="nav-link" href="{% url 'cart' %}"><i class="fa fa-shopping-crt" aria-hidden="true"></i>Your Course {{totalcarts|length}}</a>
+                            <a class="nav-link" href="{% url 'cart' %}"><i class="fa fa-shopping-crt" aria-hidden="true"></i>Your Course </a>
                         </li>
                         {% else %}
                         <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
@@ -176,20 +174,7 @@
             </nav>
         </div>
         <div class="col-lg-2 col-md-6 col-6 mt-2 ml-auto">
-            <div class="side-menu-section">
-<!--              <div class="dropdown dropleft">-->
-<!--                <a class="" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                  <i class="fa fa-bars" aria-hidden="true"></i>-->
-<!--                </a>-->
-<!--                <div class="dropdown-menu dropend" aria-labelledby="dropdownMenuLink">-->
-<!--                  <ul class="navbar-nav">-->
-<!--                  {% for i in more %}<a href="{% url 'subcat' i.slug %}" ><li class="main-class">{{i.title|title}} -->
-<!--                  </li></a>-->
-<!--                  {% endfor %}-->
-<!--                  </ul>-->
-<!--                </div>-->
-<!--              </div>-->
-            </div>
+
         </div>                                  
         </div>            
         </div>            

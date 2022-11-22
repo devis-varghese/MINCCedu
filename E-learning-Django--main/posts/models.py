@@ -166,7 +166,7 @@ class Cart(models.Model):
     purchase = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    certificate = models.BooleanField(default=False)
+
 
     def __str__(self):
         return f'{self.item}'

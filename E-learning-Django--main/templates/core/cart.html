@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 {% load static %}
 {% block body %}
-<!------ AWS Architect Certification Training-------->
+
 <section class="Certification">
     <div class="container">
         <div class="row">
@@ -31,11 +31,7 @@
                                 <th scope="row"></th>
                                 <th scope="row"><b>Rs. {{ order.get_totals | floatformat:2 }}</b></th>
                             </tr>
-<!--                            {% comment %} <tr>-->
-<!--                                {% for i in orders %}-->
-<!--                                <th scope="row"><i class="fa fa-tag"></i> Coupon Applied <br> Rs. {{i.coupon.amount|floatformat}} OFF<b></b></th>-->
-<!--                                {% endfor %}-->
-<!--                            </tr> {% endcomment %}-->
+
                         </tbody>
                         <tfoot>
                         <p></p>

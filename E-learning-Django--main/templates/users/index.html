@@ -33,21 +33,17 @@
            <div class="row">
               <div class="col-md-12">
           <div class="main-dashboard">
-            <h2>Your Enrolled Courses</h2>
-            <span>Your Courses</span>
+            <h2>Your Enrolled Course</h2>
+            <span>Your Course</span>
              <ul>
-              {% for i in orders %} 
+              {% for i in orders %}
               {% for obj in i.orderitems.all %} 
              <li><a href="#"><b>Course Name:-</b> {{ obj }}</a>
-              <br>Buy At {{i.created}}</li>
-             {% if obj.certificate == True %}
-             <li><a href="{% url 'certificate' obj.item.category.slug obj.item.slug %}">Download Your Certificate</a></li>             
-             {% else %}
+
+
              <li><a href="{% url 'paid_video' obj.item.slug %}">Watch Videos</a></li>
              
-             <li><b>Your will get your certificate after completing the course.</b></li>
-             
-             {% endif %}
+
              
              {% endfor %}
              
@@ -55,51 +51,15 @@
              </ul>
           </div>
            </div>
-             <!-- <div class="col-md-12 mt-5">
-            <div class="main-dashboard-3"> 
-             <h3>Cisco Systems, Inc. Exams</h3>
-             <h4>Exam Catalog</h4>
-             <button type="button" class="btn btn-primary">View Exams</button>
-             <hr>
-             <div class="button-section">
-                <a href="#">Do you have a private access code?</a><br>
-                <a href="#">What is this?</a>
-             </div>
-             <div class="button-section-2">
-                <p class="" style="float: right;">I want to see exams for a different <a href="#">testing program</a></p>
-             </div>
-           </div>-->
+
          </div>
          <div class="col-md-12 mt-4 mb-5">
-           <!--<div class="main-dashboard-4">
-             <h2>Upcoming Appointments</h2>
-             <p>You do not have any appointments scheduled.</p>
-            </div>-->
+
          </div>
          </div>
         </div>
-         <div class="col-md-4">
-           <div class="main-dashboard-2">
-             <h2>My Account</h2>
-              <ul>
-                 <li><a href="{% url 'profile' %}"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; My Profile</a></li>
-                 {% comment %} <li><a href="Sign in.html"><i class="fas fa-sign-in-alt"></i>&nbsp; Account Sign In</a></li> {% endcomment %}
-<!--                 <li><a href="Information.html"><i class="fa fa-info" aria-hidden="true"></i> &nbsp; Additional Information</a></li>-->
-<!--                 <li><a href="#"><i class="fa fa-asterisk"></i></i>&nbsp; Preferences</a></li>-->
-<!--                 <li><a href="#"><i class="fa fa-history"></i>&nbsp; Exam History</a></li>-->
-<!--                 {% comment %} <li><a href="#"><i class="fa fa-bug" aria-hidden="true"></i>&nbsp; View Score Reports</a></li> {% endcomment %}-->
-<!--                 <li><a href="#"><i class="fas fa-receipt"></i>&nbsp; My Receipts</a></li> -->
-                 <li><a href="{% url 'changepassword' %}"><i class="fas fa-receipt"></i>&nbsp;  Change Password</a></li> 
-                 <li><a href="{% url 'logout' %}"><i class="fas fa-receipt"></i>&nbsp; Logout</a></li> 
-              </ul>
-            </div>
-            
-<!--              <div class="dashboard-images text-center mt-4">-->
-<!--                <img src="images/dashboard.png" class="img-fluid" alt="Responsive image">-->
-<!--              </div>-->
-           
-       
-        </div>
+
+
         </div>
       </div>
     </section>
@@ -110,11 +70,7 @@
         <div class="row">
          <div class="col-md-12">
            <div class="main-ul">
-              <ul>
-                  <li><a href="#">Terms</a></li>
-                  <li><a href="#">Privacy</a></li>
-                  <li><a href="#">Contact</a></li>
-              </ul>
+
 
            </div>
          </div>

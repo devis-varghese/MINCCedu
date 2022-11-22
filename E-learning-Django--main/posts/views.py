@@ -20,7 +20,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.csrf import csrf_exempt
 from edureka.settings import *
 import razorpay
-client = razorpay.Client
+client = razorpay.Client(auth=('rzp_test_oE5GrnJfzSUqCP','xmxWct8JWngneVWqA3HtLCyZ'))
 # Create your views here.
 
 #for email verification
@@ -139,7 +139,7 @@ def verify_payment(request):
             client.utility.verify_payment_signature(data)
             razorpay_order_id = data['razorpay_order_id']
             razorpay_payment_id = data['razorpay_payment_id']
-            order = Order.objects.get(order_id = razorpay_order_id)
+            order = Order.objects.get(order_id=razorpay_order_id)
             order.payment_id = razorpay_payment_id
             order.ordered = True
             order.save()
@@ -249,9 +249,9 @@ def userdashboard(request):
     customer = enrolledstudents.objects.all()
     carts = Cart.objects.filter(user=request.user, purchase=True)
     orders = Order.objects.filter(user=request.user, ordered=True)
-    # if orders.exists() and carts.exists():
-    #     order = orders[0]
-    #     return render(request, 'users/index.html', context={'carts':carts,'orders':orders})
+    if orders.exists() and carts.exists():
+        order = orders[0]
+        return render(request, 'users/index.html', context={'carts':carts,'orders':orders})
     context = {'carts':carts,'customer':customer, 'orders':orders}
     return render(request, 'users/index.html', context)
 
@@ -322,7 +322,7 @@ def add_to_cart(request, slug):
 
 def checkout(request):
     user = None
-    # coupon = promocode.objects.all()
+
     if request.method == 'get':
         try:
             orders = Order.objects.get(user=request.user, ordered=False)
@@ -358,7 +358,7 @@ def checkout(request):
         order_payment = orders[0]
         order_payment.user = user
         order_payment.emailAddress = user.email
-        # order_payment.coupon = order.coupon
+
         order_payment.order_id = orderss.get('id')
         order_payment.total = orderss.get('amount')
         order_payment.save()
@@ -377,8 +377,8 @@ def cart_view(request):
         order = orders[0]
         return render(request, 'core/cart.html', context={'carts':carts,'order':order,'orders':orders})
     else:
-        messages.warning(request, "You have no courses enrolled")
-        return redirect('home')
+        messages.warning(request, "")
+        return redirect('userhome')
 
 # @login_required
 # def order_view(request):

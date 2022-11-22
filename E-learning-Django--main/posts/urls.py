@@ -66,7 +66,7 @@ urlpatterns = [
     #Public urls
     # path('career/', views.career, name='career'),
     path('add/<str:slug>', views.add_to_cart, name='add'),
-    # path('add_promo/<code>', views.add_promo, name='add_promo'),
+
     path('cart/', views.cart_view, name='cart'),
     path('removecart/<int:id>', views.remove_from_cart, name='removecart'),
     path('search/', views.search, name='search'),
@@ -83,7 +83,7 @@ urlpatterns = [
     path('courses/', views.courses, name='courses'),            
     # path('<str:slug>', views.blank_page, name='blank_page'),
     path('checkout/', views.checkout, name='checkout'), 
-    # path('add-promocode/', views.add_coupon, name='add_coupon'),
+
     path('verify_payment/', views.verify_payment, name='verify_payment'), 
     path('allcourses/', views.totalposts, name='all-courses'), 
 

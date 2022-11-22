@@ -71,7 +71,7 @@
             </section>
     </section>
 
-<!---The Edureka images--- -->
+
     <section class="Edureka-images mb-5">
         <div class="container-fluid">
             <div class="row">
@@ -112,7 +112,7 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  <i class="fa fa-bars" aria-hidden="true"></i>
+                  <i class="fa fa-ars" aria-hidden="true"></i>
                 </a>
                 <div class="dropdown-menu dropend" aria-labelledby="dropdownMenuLink">
                   <ul class="navbar-nav">
@@ -177,10 +177,7 @@
                 </div>
             {% endfor %}    
             </div>
-            <div class="button-setion text-center mt-4 mb-4">
-                <a href="{% url 'all-courses' %}" class="btn btn-primary">Browse all courses</a>
-                <p>Explore our wide range of courses</p>
-            </div>
+
         </div>
     </section>
 
@@ -285,7 +282,7 @@
  <section class="home_all_course_strip mt-4 mb-4">
         <div class="container">
             <label>Enroll, Learn, Grow, Repeat! Get ready to achieve your learning goals with MINCC</label>
-            <a href="#">View All Courses</a>
+            <a href="{% url 'all-courses' %}">View All Courses</a>
         </div>
     </section>
     <!---Option 2: jQuery, Popper.js, and Bootstrap JS- -->
