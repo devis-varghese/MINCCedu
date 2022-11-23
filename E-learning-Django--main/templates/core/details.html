@@ -25,57 +25,28 @@
   </div>
 </section>
 
-<!----Video Panel--- -->
-<section>
-  <div class="container clp-video-panel">
-    <div class="row">
-      <div class="col-md-4">
-        <div class="container clp-video-panel">
-           {% for i in latest_catg %}
-                    {% if i.children.all %}
-                    <a href="{% url 'catpost'%}"></a>
-                    {% endif %}
-                    {% endfor %}
-        </div>
-      </div>
 
-      <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12 no-padding blurb_course">
-        <div class="blurb_bx">
-          <div style="text-align: justify">{{posts.desc|safe}}</div>
-        </div>
+<div class="container">
 
-      </div>
-    </div>
-  </div>
-</section>
+    <div class="row sub_content_bx">
+      <div class="col no-padding box_heading_section">
+        <div class="table-starts">
+          <div class="table-responsive">
+            <table class="table">
+               <div style="text-align: justify" style="margin-left:50%">{{posts.desc|safe}}</div>
 
-<div class="navigation-wrap bg-light start-header start-style">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <nav class="navbar navbar-expand-md navbar-light">
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto py-4 py-md-0">
-
-            </ul>
+            </table>
           </div>
-        </nav>
+        </div>
+      </div>
+
+
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+
 
   <div class="container">
 
@@ -192,7 +163,7 @@
       </div>
     </div>
     <div class="row">
-    {% for i in videos %}
+
       <div class="col-md-12" style="margin-bottom:30px;">
         <div class="box_syllabus_course clearfix">
           <div class="top_info_sub_course">
@@ -240,7 +211,7 @@
                 <a href="{% url 'all-courses' %}" class="btn btn-primary">Browse all courses</a>
                 <p>Explore our wide range of courses</p>
             </div>
-    {% endfor %}
+
     </div>
   </div>
 </section>

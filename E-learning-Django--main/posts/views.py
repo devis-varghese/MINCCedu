@@ -335,7 +335,7 @@ def checkout(request):
     orders = Order.objects.filter(user=request.user, ordered=False)           
     user = request.user        
     if orders.exists():
-        order = orders[0]   
+        order = orders[0]
     orderss = None    
     order_payment = None
     action = request.GET.get('action')    

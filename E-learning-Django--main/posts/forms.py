@@ -101,10 +101,10 @@ class CustomerForm(forms.ModelForm):
 class CustomerEditForm(forms.ModelForm):
     class Meta:
         model=enrolledstudents
-        fields=['address','mobile','profile_pic','Country','Company','City','State','Zip_Code','Telephone','Extension']
+        fields=['address','mobile','profile_pic','Country']
 
 class CustomerCreationEditForm(UserChangeForm):
-    # password = forms.CharField(widget=forms.TextInput(attrs={'type':'hidden'}))
+
     username = forms.EmailField(required=True , label="Email" )
     first_name = forms.CharField(required=True , label="First Name")
     last_name = forms.CharField(required=True , label="Last Name")
@@ -188,12 +188,5 @@ class approve_certForm(forms.ModelForm):
         model = Cart
         fields = ['certificate']
 
-# class sendmessage(forms.ModelForm):
-
-    # class Meta:
-    #     model = message
-    #     fields = '__all__'
-    #     exclude = ['wp']
-    #
 
 

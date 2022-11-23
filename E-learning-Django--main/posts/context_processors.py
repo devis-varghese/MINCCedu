@@ -3,7 +3,7 @@ from .models import *
 
 def menu_links(request):
     links = Category.objects.filter(parent=None).order_by('-hit')
-    # categoriess = Category.objects.all().filter(top_three_cat=False).filter(parent=None).filter(more=False).order_by('-created_at').order_by('hit')[:15]
+
     categoriess = Category.objects.all().filter(top_three_cat=False).filter(parent=None).filter(more=False).order_by('-created_at').order_by('hit')[:15]
     footcategories = Category.objects.filter(parent=None)[:2]
     allcat = Category.objects.all()
@@ -32,9 +32,5 @@ def disc(request):
     disc_post = Post.objects.all().filter(disc=True)
     return dict(disc_cat=disc_cat, disc_post=disc_post)
 
-# def get_course_time(request, slug):
-#     getpost = get_object_or_404(Post, slug=slug)
-#     #for Timing
-#     gettime = timing.objects.filter(Post=allpost)
-#     return dict(getpost=getpost, gettime=gettime)
+
 

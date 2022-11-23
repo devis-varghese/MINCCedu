@@ -44,26 +44,18 @@
             <div class="main-dashboard-3"> 
              <h3>Primary Contact Information</h3>
              <div class="edit2" style="float: right;">
-                {% comment %} <a href="{% url 'editdata' customer.id %}" class="btn btn-outline-primary">Edit</a> {% endcomment %}
+                {% comment %} <a href="{% url 'editprofile' enrolledstudents.id %}" class="btn btn-outline-primary">Edit</a> {% endcomment %}
               </div>
               <p>Additional Details</p>
-              <p><b> Country/Region of Residence:</b> {{customer.City}}</p>
-               <p><b>Company:</b> {{customer.Company|title}}</p>
+              <p><b> Country/Region of Residence:</b> {{profile_form.City}}</p>
 
-               <p><b>Address:</b> {{customer.address|title}}
-               </p>             
-              <p><b>City:</b> {{customer.City|title}}</p>
 
-               <p><b>State/Territory:</b> {{customer.State}}</p>
+               <p><b>Address:</b> {{profile_form.address|title}}
+               </p>
 
-               <p><b>Post Code:</b> {{customer.Zip_Code}}</p>
-               <p><b>Telephone:</b> {{customer.Telephone}}</p>
+                <p><b>Mobile:</b> {{profile_form.mobile}}</p>
 
-               <p><b>Extension:</b> {{customer.Extension}}</p>
-
-               <p><b>Mobile:</b> {{customer.mobile}}</p>
-
-               <p><b>Email:</b> {{request.user.email}}</p>
+               <p><b>Email:</b> {{profile_form.email}}</p>
            </div>
          </div>
 

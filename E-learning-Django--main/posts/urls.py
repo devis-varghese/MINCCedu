@@ -64,30 +64,30 @@ urlpatterns = [
 
 
     #Public urls
-    # path('career/', views.career, name='career'),
+
     path('add/<str:slug>', views.add_to_cart, name='add'),
 
     path('cart/', views.cart_view, name='cart'),
     path('removecart/<int:id>', views.remove_from_cart, name='removecart'),
     path('search/', views.search, name='search'),
-    # path('category/<str:slug>/', views.post_by_category, name='catpost'),
+
     path('filter/<str:catslug>', views.post_by_category, name='catpost'),
-    # path('subcat/<str:slug>/', views.subcat_by_category, name='subcat'),
+
     path('subcat/<str:subcatslug>', views.subcat_by_category, name='subcat'),
-    # path('posts/category/<str:slug>/', views.allpost_by_category, name='allcatpost'),
+
     path('<str:postslug>', views.allpost_by_category, name='allcatpost'),
     path('<str:category_slug>/<str:slug>', views.post_details, name='details'),
     path('videos/', views.videos, name='videos'),
     path('users/yourcoursesvideo/<str:slug>/', views.paid_video, name='paid_video'),
 
     path('courses/', views.courses, name='courses'),            
-    # path('<str:slug>', views.blank_page, name='blank_page'),
+
     path('checkout/', views.checkout, name='checkout'), 
 
     path('verify_payment/', views.verify_payment, name='verify_payment'), 
     path('allcourses/', views.totalposts, name='all-courses'), 
 
-    # url(r'^getSubcategory/$', views.get_subcategory)           
+
 
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

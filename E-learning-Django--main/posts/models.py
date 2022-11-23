@@ -23,12 +23,7 @@ class enrolledstudents(models.Model):
     address = models.CharField(max_length=40)
     mobile = models.CharField(max_length=20,null=False)
     Country = models.CharField(max_length=20,null=False, blank=True)
-    Company = models.CharField(max_length=20,null=False, blank=True)
-    City =  models.CharField(max_length=20,null=False, blank=True)
-    State =  models.CharField(max_length=20,null=False, blank=True)
-    Zip_Code =  models.IntegerField(blank=True, default="1")
-    Telephone =  models.IntegerField(blank=True, default="1")
-    Extension =  models.CharField(max_length=20,null=False, blank=True)
+
     @property
     def get_name(self):
         return self.user.first_name+" "+self.user.last_name
@@ -58,9 +53,6 @@ class Category(models.Model):
         return self.posts.all().count()    
 
     class Meta:
-        #enforcing that there can not be two categories under a parent with same slug
-
-        # __str__ method elaborated later in post.  use __unicode__ in place of
 
         unique_together = ('slug', 'parent',)
         verbose_name_plural = "categories"
