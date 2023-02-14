@@ -83,14 +83,14 @@ class CustomerCreationForm(UserCreationForm):
 
     def clean_first_name(self):
         value = self.cleaned_data.get('first_name')
-        if len(value.strip()) < 4 :
-            raise ValidationError("First Name must be 4 char long...")
+        if len(value.strip()) < 0 :
+            raise ValidationError("First Name cant be empty")
         return value.strip()
     
     def clean_last_name(self):
         value = self.cleaned_data.get('last_name')
-        if len(value.strip()) < 4 :
-            raise ValidationError("Last Name must be 4 char long...")
+        if len(value.strip()) < 0 :
+            raise ValidationError("please enter a last name")
         return value.strip()
 
 class CustomerForm(forms.ModelForm):
