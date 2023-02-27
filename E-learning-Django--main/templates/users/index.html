@@ -38,7 +38,7 @@
              <ul>
               {% for i in orders %}
               {% for obj in i.orderitems.all %} 
-             <li><a href="#"><b>Course Name:-</b> {{ obj }}</a>
+             <a><b>Course Name:-</b> {{ obj }}</a>
 
 
              <li><a href="{% url 'paid_video' obj.item.slug %}">Watch Videos</a></li>

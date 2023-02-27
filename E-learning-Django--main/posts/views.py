@@ -604,10 +604,10 @@ def delete_video(request, id):
     messages.success(request, "video Deleted Successfully.")
     return redirect('allcourses')   
 
-def allvideos(request):
-    vid = video.objects.all()
-    context = {'video':vid}
-    return render(request, 'webadmin/allvideo.html', context)
+# def allvideos(request):
+#     vid = video.objects.all()
+#     context = {'video':vid}
+#     return render(request, 'webadmin/allvideo.html', context)
 
 def paid_video(request, slug):
     allpost = get_object_or_404(Post, slug=slug)
@@ -841,4 +841,24 @@ def edit_rightcat(request, id):
         editcatForm= rightmenu(instance=cat)
 
     return render(request, "webadmin/editrightcat.html", {'editcat':editcatForm})
+
+def allvideos(request):
+    videos = [
+        {
+            'title': 'Video 1',
+            'url': 'https://example.com/video1.mp4',
+            'description': 'This is the first video'
+        },
+        {
+            'title': 'Video 2',
+            'url': 'https://example.com/video2.mp4',
+            'description': 'This is the second video'
+        },
+        {
+            'title': 'Video 3',
+            'url': 'https://example.com/video3.mp4',
+            'description': 'This is the third video'
+        }
+    ]
+    return render(request, 'videos.html', {'videos': videos})
 
