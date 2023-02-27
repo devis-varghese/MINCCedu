@@ -21,6 +21,7 @@ urlpatterns = [
     path('allcat/', views.allcat, name='allcat'),
     path('allusers/', views.allusers, name='allusers'),
     path('allcourse/', views.allcourse, name='allcourses'),
+    # path('alltutors/', views.allcourse, name='alltutors'),
     path('allorders/', views.allorders, name='allorders'),
 
     path('allvideos/', views.allvideos, name='allvideos'),
