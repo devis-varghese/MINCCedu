@@ -46,7 +46,7 @@ def home(request):
     latest_catg = Category.objects.filter(parent=None)[:5]
     latest_catg_all = Category.objects.filter(parent=None)[5:]
     latest_post = Post.objects.order_by('-date')[:4]
-    # rev = Reviews.objects.all().order_by('-created')[:6]
+
     context = {'allposts':allposts, 'main_course':main_course, 'top_three_catg':top_three_catg, 'catg':catg, 'slider_post':slider_post, 'latest_catg':latest_catg, 'latest_post':latest_post, 'totalposts':totalposts, 
     
     # 'catg_parent':catg_parent,
