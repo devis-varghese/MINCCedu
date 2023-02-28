@@ -21,7 +21,7 @@ urlpatterns = [
     path('allcat/', views.allcat, name='allcat'),
     path('allusers/', views.allusers, name='allusers'),
     path('allcourse/', views.allcourse, name='allcourses'),
-    # path('alltutors/', views.allcourse, name='alltutors'),
+
     path('allorders/', views.allorders, name='allorders'),
 
     path('allvideos/', views.allvideos, name='allvideos'),
@@ -86,7 +86,8 @@ urlpatterns = [
     path('checkout/', views.checkout, name='checkout'), 
 
     path('verify_payment/', views.verify_payment, name='verify_payment'), 
-    path('allcourses/', views.totalposts, name='all-courses'), 
+    path('allcourses/', views.totalposts, name='all-courses'),
+    path('alltutors/', views.alltutors, name='alltutors'),
 
 
 

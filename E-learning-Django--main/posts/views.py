@@ -58,6 +58,11 @@ def totalposts(request):
     context = {'total':total}
     return render(request, 'core/total.html', context)
 
+def alltutors(request):
+    total = enrolledstudents.objects.all()
+    context = {'total':total}
+    return render(request, 'webadmin/alltutors.html', context)
+
 def post_by_category(request, catslug):
     posts = Post.objects.all()
     cat_post = Post.objects.filter(category__slug=catslug)
@@ -256,8 +261,8 @@ def userdashboard(request):
     return render(request, 'users/index.html', context)
 
 def userprofile(request):
-    enrolledstudents1 = enrolledstudents.objects.get(user_id=request.user.id)
-    context = {'enrolledstudents':enrolledstudents}
+    profile = enrolledstudents.objects.get(user_id=request.user.id)
+    context = {'profile':profile}
     return render(request, 'users/profile.html', context)
 
 def edit_profile(request):
