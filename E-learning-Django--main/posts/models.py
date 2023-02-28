@@ -33,6 +33,18 @@ class enrolledstudents(models.Model):
     def __str__(self):
         return self.user.first_name
 
+
+class tutor(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_pic = models.ImageField(upload_to='media/profile_pic', null=True, blank=True)
+    resume = models.FileField(upload_to='media/certificate', blank=True, null=True)
+    mobile = models.CharField(max_length=20, null=False)
+    Country = models.CharField(max_length=20, null=False, blank=True)
+
+
+    def __str__(self):
+        return self.user.first_name
+
 class Category(models.Model):
     parent = models.ForeignKey('self', related_name='children', on_delete=models.CASCADE, blank = True, null=True)
     title = models.CharField(max_length=100) 

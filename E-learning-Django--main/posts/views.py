@@ -1,6 +1,6 @@
-
-from django.shortcuts import get_object_or_404, redirect, render
 from .models import *
+from django.shortcuts import get_object_or_404, redirect, render
+
 from .forms import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as loginUser, update_session_auth_hash
@@ -59,9 +59,23 @@ def totalposts(request):
     return render(request, 'core/total.html', context)
 
 def alltutors(request):
-    total = enrolledstudents.objects.all()
-    context = {'total':total}
+    total1 = enrolledstudents.objects.all()
+    context = {'total1':total1}
     return render(request, 'webadmin/alltutors.html', context)
+# def alltutors(request):
+#     # Check if the user is a student
+#     if not request.user.is_student:
+#         return redirect('home')
+#
+#     if request.method == 'POST':
+#         # Get the user object and create a tutor object
+#         user = User.objects.get(id=request.user.id)
+#         tutor = Tutor.objects.create(user=user)
+#
+#         # Redirect the user to the dashboard
+#         return redirect('dashboard')
+#
+#     return render(request, 'become_tutor.html')
 
 def post_by_category(request, catslug):
     posts = Post.objects.all()
