@@ -31,6 +31,8 @@ from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
 from django.core.mail import send_mail
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 def home(request):
     allposts = Post.objects.all().filter(maincourse=True)
@@ -58,24 +60,24 @@ def totalposts(request):
     context = {'total':total}
     return render(request, 'core/total.html', context)
 
-def alltutors(request):
-    total1 = enrolledstudents.objects.all()
-    context = {'total1':total1}
-    return render(request, 'webadmin/alltutors.html', context)
 # def alltutors(request):
-#     # Check if the user is a student
-#     if not request.user.is_student:
-#         return redirect('home')
-#
-#     if request.method == 'POST':
-#         # Get the user object and create a tutor object
-#         user = User.objects.get(id=request.user.id)
-#         tutor = Tutor.objects.create(user=user)
-#
-#         # Redirect the user to the dashboard
-#         return redirect('dashboard')
-#
-#     return render(request, 'become_tutor.html')
+#     total1 = enrolledstudents.objects.all()
+#     context = {'total1':total1}
+#     return render(request, 'webadmin/alltutors.html', context)
+def alltutors(request):
+    # Check if the user is a student
+    if not request.user.is_student:
+        return redirect('home')
+
+    if request.method == 'POST':
+        # Get the user object and create a tutor object
+        user = User.objects.get(id=request.user.id)
+        tutor = tutor.objects.create(user=user)
+
+        # Redirect the user to the dashboard
+        return redirect('dashboard')
+
+    return render(request, 'usersignup.html')
 
 def post_by_category(request, catslug):
     posts = Post.objects.all()
@@ -300,7 +302,6 @@ def edit_profile(request):
     })
 
 
-
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -318,25 +319,51 @@ def change_password(request):
     })
 
 
-@login_required(login_url='/login/')
+# @login_required(login_url='/login/')
+# def add_to_cart(request, slug):
+#     course = get_object_or_404(Post, slug=slug)
+#     order_item = Cart.objects.get_or_create(item=course, user=request.user, purchase=False)
+#     order_object = Order.objects.filter(user=request.user, ordered=False)
+#     if order_object.exists():
+#         order = order_object[0]
+#         if order.orderitems.filter(item=course).exists():
+#             messages.success(request, "You already enrolled this course")
+#             return redirect('cart')
+#         else:
+#             order.orderitems.add(order_item[0])
+#             messages.success(request, "You have Enrolled for this course,Complete Payment to continue to course!")
+#             return redirect('cart')
+#     else:
+#         order = Order(user= request.user)
+#         order.save()
+#         order.orderitems.add(order_item[0])
+#         messages.success(request, "You have Enrolled for this course,Complete Payment to continue to course!")
+#         return redirect('cart')
+
+@login_required
 def add_to_cart(request, slug):
     course = get_object_or_404(Post, slug=slug)
-    order_item = Cart.objects.get_or_create(item=course, user=request.user, purchase=False)
+    order_object = Order.objects.filter(user=request.user, ordered=True)
+    if order_object.exists():
+        messages.error(request, "You have already purchased a course and cannot purchase another.")
+        return redirect('cart')
+    order_item, created = Cart.objects.get_or_create(item=course, user=request.user, purchase=False)
     order_object = Order.objects.filter(user=request.user, ordered=False)
     if order_object.exists():
         order = order_object[0]
         if order.orderitems.filter(item=course).exists():
-            messages.success(request, "You already enrolled this course")
+            messages.error(request, "You have already enrolled in this course. Please complete the payment to continue.")
             return redirect('cart')
         else:
-            order.orderitems.add(order_item[0])
-            messages.success(request, "You have Enrolled for this course,Complete Payment to continue to course!")
+            order.orderitems.add(order_item)
+            order.save()
+            messages.success(request, "You have successfully enrolled in this course. Please complete the payment to continue.")
             return redirect('cart')
     else:
-        order = Order(user= request.user)
+        order = Order.objects.create(user=request.user)
+        order.orderitems.add(order_item)
         order.save()
-        order.orderitems.add(order_item[0])
-        messages.success(request, "You have Enrolled for this course,Complete Payment to continue to course!")
+        messages.success(request, "You have successfully enrolled in this course. Please complete the payment to continue.")
         return redirect('cart')
 
 def checkout(request):
