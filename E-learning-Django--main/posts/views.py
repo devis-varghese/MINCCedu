@@ -71,15 +71,15 @@ def job_application(request):
             send_mail(
                 'Job Application Received',
                 'You have successfully applied for the job as a tutor. We will let you know if you are hired.',
-                'noreply@yourdomain.com',
+                'minccedu@gmail.com',
                 [form.cleaned_data['email']],
                 fail_silently=False,
             )
-            return render(request, 'job_application/thank_you.html')
+            return render(request, 'core/thankyou.html')
     else:
         form = JobApplicationForm()
 
-    return render(request, 'job_application/job_application.html', {'form': form})
+    return render(request, 'core/jobapplication.html', {'form': form})
 
 
 
