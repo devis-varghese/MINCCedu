@@ -5,6 +5,21 @@ from django.core.exceptions import ValidationError
 from .models import *
 from django.forms import inlineformset_factory
 
+class JobApplicationForm(forms.ModelForm):
+    class Meta:
+        model = JobApplication
+        fields = ['name', 'email', 'phone', 'education', 'experience']
+        widgets = {
+            'education': forms.Textarea(attrs={'rows': 3}),
+            'experience': forms.Textarea(attrs={'rows': 3}),
+        }
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if email and JobApplication.objects.filter(email=email).exists():
+            raise forms.ValidationError('This email address has already been used to apply for this job.')
+        return email
+
 
 class PostForm(forms.ModelForm):
     maincourse = forms.ModelMultipleChoiceField(

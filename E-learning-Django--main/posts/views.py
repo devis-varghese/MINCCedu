@@ -1,6 +1,5 @@
 from .models import *
 from django.shortcuts import get_object_or_404, redirect, render
-
 from .forms import *
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as loginUser, update_session_auth_hash
@@ -33,6 +32,9 @@ from django.core.mail import EmailMessage
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from django.contrib.auth.models import User
+
 
 def home(request):
     allposts = Post.objects.all().filter(maincourse=True)
@@ -60,24 +62,54 @@ def totalposts(request):
     context = {'total':total}
     return render(request, 'core/total.html', context)
 
-# def alltutors(request):
-#     total1 = enrolledstudents.objects.all()
-#     context = {'total1':total1}
-#     return render(request, 'webadmin/alltutors.html', context)
-def alltutors(request):
-    # Check if the user is a student
-    if not request.user.is_student:
-        return redirect('home')
 
+def job_application(request):
     if request.method == 'POST':
-        # Get the user object and create a tutor object
-        user = User.objects.get(id=request.user.id)
-        tutor = tutor.objects.create(user=user)
+        form = JobApplicationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            send_mail(
+                'Job Application Received',
+                'You have successfully applied for the job as a tutor. We will let you know if you are hired.',
+                'noreply@yourdomain.com',
+                [form.cleaned_data['email']],
+                fail_silently=False,
+            )
+            return render(request, 'job_application/thank_you.html')
+    else:
+        form = JobApplicationForm()
 
-        # Redirect the user to the dashboard
-        return redirect('dashboard')
+    return render(request, 'job_application/job_application.html', {'form': form})
 
-    return render(request, 'usersignup.html')
+
+
+def alltutors(request):
+    # Get all staff users
+    staff_users = User.objects.filter(is_staff=True)
+
+    context = {
+        'staff_users': staff_users,
+    }
+    return render(request, 'webadmin/alltutors.html', context)
+
+
+
+#
+
+# def alltutors(request):
+#     # Check if the user is a student
+#     if not request.user.is_active:
+#         return redirect('home')
+#
+#     if request.method == 'POST':
+#         # Get the user object and create a tutor object
+#         user = User.objects.get(id=request.user.id)
+#         tutor = tutor.objects.create(user=user)
+#
+#         # Redirect the user to the dashboard
+#         return redirect('dashboard')
+#
+#     return render(request, 'usersignup.html')
 
 def post_by_category(request, catslug):
     posts = Post.objects.all()

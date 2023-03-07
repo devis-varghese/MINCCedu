@@ -33,6 +33,14 @@ class enrolledstudents(models.Model):
     def __str__(self):
         return self.user.first_name
 
+class JobApplication(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    education = models.TextField()
+    experience = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
 
 class tutor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
