@@ -5,15 +5,22 @@ from django.core.exceptions import ValidationError
 from .models import *
 from django.forms import inlineformset_factory
 
+# class JobApplicationForm(forms.ModelForm):
+#     class Meta:
+#         model = JobApplication
+#         fields = ['name', 'email', 'phone', 'education', 'experience']
+#         widgets = {
+#             'education': forms.Textarea(attrs={'rows': 3}),
+#             'experience': forms.Textarea(attrs={'rows': 3}),
+#         }
+
 class JobApplicationForm(forms.ModelForm):
     class Meta:
         model = JobApplication
-        fields = ['name', 'email', 'phone', 'education', 'experience']
+        fields = ['name', 'email', 'phone_number', 'resume', 'cover_letter']
         widgets = {
-            'education': forms.Textarea(attrs={'rows': 3}),
-            'experience': forms.Textarea(attrs={'rows': 3}),
+            'cover_letter': forms.Textarea(attrs={'rows': 5}),
         }
-
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if email and JobApplication.objects.filter(email=email).exists():

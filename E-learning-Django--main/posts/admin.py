@@ -1,6 +1,14 @@
 from django.contrib import admin
 from .models import *
+from django.core.mail import send_mail
 from django.utils.html import format_html
+
+from django.contrib.auth.models import User
+from django.contrib.auth.admin import UserAdmin
+from django.core.mail import send_mail
+from django.utils.crypto import get_random_string
+
+
 
 # Register your models here.
 
@@ -33,6 +41,41 @@ class CuricullamAdmin(admin.ModelAdmin):
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['user', 'ordered']
+
+
+class JobApplicationAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'phone_number', 'status', 'date_applied')
+    list_filter = ('status',)
+    search_fields = ('name', 'email', 'phone_number', 'status')
+
+    def save_model(self, request, obj, form, change):
+        old_obj = JobApplication.objects.get(pk=obj.pk) if obj.pk else None
+        super().save_model(request, obj, form, change)
+        if old_obj and old_obj.status != obj.status:
+            print(obj.status)
+            if obj.status == 'accepted':
+                # Generate random password for new user account
+                password = get_random_string(length=10)
+                send_mail(
+                    f"Job Application Status: {obj.status}",
+                    f"Congratulations, your job application has been accepted!\n\nYour login credentials are:\nUsername: {obj.email}\nPassword: {password}\n\nYou can log in to the tutor dashboard at http://example.com/login/.",
+                    'minccedu@gmail.com',
+                    [obj.email],
+                    fail_silently=False,
+                )
+
+            if obj.status == 'pending' or  obj.status == 'rejected':
+                send_mail(
+                f"Job Application Status: {obj.status}",
+                f"Your job application has been updated to {obj.status}.",
+                'minccedu@gmail.com',
+                [obj.email],
+                fail_silently=False,
+                )
+
+
+admin.site.register(JobApplication, JobApplicationAdmin)
+
 
 
 admin.site.register(Category)

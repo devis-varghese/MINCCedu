@@ -33,14 +33,28 @@ class enrolledstudents(models.Model):
     def __str__(self):
         return self.user.first_name
 
+# class JobApplication(models.Model):
+#     name = models.CharField(max_length=100)
+#     email = models.EmailField()
+#     phone = models.CharField(max_length=20)
+#     education = models.TextField()
+#     experience = models.TextField()
+#     created_at = models.DateTimeField(auto_now_add=True)
 class JobApplication(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
-    phone = models.CharField(max_length=20)
-    education = models.TextField()
-    experience = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
+    phone_number = models.CharField(max_length=15)
+    resume = models.FileField(upload_to='media/media/resumes/')
+    cover_letter = models.TextField()
+    date_applied = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=20, choices=(
+        ('pending', 'Pending'),
+        ('accepted', 'Accepted'),
+        ('rejected', 'Rejected')
+    ))
 
+    def __str__(self):
+        return f"{self.name} - {self.date_applied}"
 
 class tutor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
