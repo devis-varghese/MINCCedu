@@ -29,24 +29,7 @@
            </nav>
        </div>
     </section>
-   <!---sidebar-section--- -->
-    {% comment %} <section class="sidebar-section">
-      <div class="container"> 
-        <div class="w3-sidebar w3-bar-block w3-dark-grey w3-animate-left" style="display:none" id="mySidebar">
-  <button class="w3-bar-item w3-button w3-large"
-  onclick="w3_close()"><i class="fa fa-bars" aria-hidden="true"></i></button>
-  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-user-circle" aria-hidden="true"></i>&nbsp;&nbsp;Surjeet Singh</a>
-  <a href="#" class="w3-bar-item w3-button"><i class="fa fa-sitemap" aria-hidden="true"></i>&nbsp;&nbsp;Dashboard</a>
-  <a href="#" class="w3-bar-item w3-button"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Sign out</a>
-   <a href="#" class="w3-bar-item w3-button"><i class="fa fa-language" aria-hidden="true"></i>&nbsp;&nbsp;Language</a>
 
-</div>
-<div>
-  <button class="w3-button w3-white w3-xxlarge" onclick="w3_open()"><i class="fa fa-angle-double-right"></i></button>
-</div>
-
-       </div>
-    </section> {% endcomment %}
     
     <section class="dashboard-heading">
       <div class="container">
@@ -60,10 +43,6 @@
                <h3>Username</h3>
                <p>Your username must contain 6 or more characters.</p>
 
-               {% comment %} <p>Current Username:<br>
-              <span>Devis</span>
-               </p> {% endcomment %}
-
                <form method='post'>
                {% csrf_token %}
                {{form|crispy}}
@@ -76,121 +55,12 @@
               
           </div>
            </div>
-        {% comment %} <div class="col-md-12 mt-5">
-            <div class="main-dashboard-3"> 
-             <h3>Password</h3>
-             <p>Your password must contain:</p>
-             <p>
-               <ul>
-                 <li>8 or more characters</li>
-                 <li>a combination of uppercase and lowercase letters</li>
-                 <li>numbers (0-9) or symbols (#, $, %, etc.)</li>
-               </ul>
-             </p>
-             <p>Your password cannot include your username.</p>
 
-             <form>
-                <div class="form-group row">
-                 <div class="col-md-6">
-    <label for="exampleInputPassword1">Current Password:</label>
-    <input type="password" class="form-control" id="exampleInputPassword1">
-     </div>
-  </div>
-  <div class="form-group row">
-     <div class="col-md-6">
-    <label for="exampleInputEmail1">New Username:</label>
-    <input type="name" class="form-control" id="exampleInputName">
-     </div>   
-     </div>
-     <div class="form-group row">
-     <div class="col-md-6">
-    <label for="exampleInputEmail1">Password Strength:</label>
-     <input type="password" class="form-control" id="exampleInputPassword1">
-     </div>   
-     </div>
-     <div class="form-group row">
-     <div class="col-md-6">
-    <label for="exampleInputEmail1">Confirm New Password:</label>
-     <input type="password" class="form-control" id="exampleInputPassword1">
-     </div>   
-     </div>
-</form> {% endcomment %}
             
               
            </div>
          </div>
-         {% comment %} <div class="col-md-12 mt-4 mb-5">
-           <div class="main-dashboard-4">
-             <h3>Security Questions</h3>
-              <p>Your security answers cannot contain your username or password.</p>
-               <form>
-                <div class="form-group row">
-                   <div class="col-md-6">
-                  <label for="exampleFormControlSelect1">Question:</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                       <option>What was the name of the first school you attended?</option>
-                       <option>What is the last name of your favorite school teacher?</option>
-                       <option>What was your childhood nickname?</option>
-                       <option>What was your favorite place to visit as a child?</option>
-                       <option>What is your grandmothers first name?</option>
-                       <option>What was the last name of your third grade teacher?</option>
-                       <option>In what city or town was your first job?</option>
-                       <option>What is your oldest sibling's nickname?</option>
-                       <option>What is the name of the place your first wedding reception was held?</option>
-                   </select>
-                  </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <label for="exampleInputEmail1">Answer:</label>
-                          <input type="name" class="form-control" id="exampleInputName">
-                       </div>   
-                    </div>
-                    <div class="form-group row">
-                   <div class="col-md-6">
-                  <label for="exampleFormControlSelect1">Question:</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                       <option>What school did you attend for sixth grade?</option>
-                       <option>In what city or town did your parents meet?</option>
-                       <option>Who was your childhood hero?</option>
-                       <option>What was your most memorable gift as a child?</option>
-                       <option>What is your mother's middle name?</option>
-                       <option>What was your high school mascot?</option>
-                       <option>What is the name of the first undergraduate college/university you attended?</option>
-                       <option>What is your first spouse or first significant other's middle name?</option>
-                   </select>
-                  </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <label for="exampleInputEmail1">Answer:</label>
-                          <input type="name" class="form-control" id="exampleInputName">
-                       </div>   
-                    </div>
-                    <div class="form-group row">
-                   <div class="col-md-6">
-                  <label for="exampleFormControlSelect1">Question:</label>
-                    <select class="form-control" id="exampleFormControlSelect1">
-                       <option>What street did you live on in third grade?</option>
-                       <option>What was the first concert you attended?</option>
-                       <option>What is the first name of your favorite childhood friend?</option>
-                       <option>What year did you graduate from high school?</option>
-                       <option>What is the name of the first company for which you worked?</option>
-                       <option>What is your oldest siblings middle name?</option>
-                       <option>In what city or town did you meet your first spouse or significant other?</option>
-                       <option>Where did you go on your first honeymoon?</option>
-                   </select>
-                  </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-md-6">
-                        <label for="exampleInputEmail1">Answer:</label>
-                          <input type="name" class="form-control" id="exampleInputName">
-                       </div>   
-                    </div>
-              </form>
-            </div>
-         </div> {% endcomment %}
+
         </div>
        <div>
         <div class="row">

@@ -3,6 +3,9 @@ from django import forms
 from django.contrib.auth.models import Group, User
 from django.core.exceptions import ValidationError
 from .models import *
+from django.forms.widgets import ClearableFileInput
+from django.template.loader import render_to_string
+from django.utils.safestring import mark_safe
 from django.forms import inlineformset_factory
 
 # class JobApplicationForm(forms.ModelForm):
@@ -13,14 +16,44 @@ from django.forms import inlineformset_factory
 #             'education': forms.Textarea(attrs={'rows': 3}),
 #             'experience': forms.Textarea(attrs={'rows': 3}),
 #         }
+# class FileInputWithPreview(forms.ClearableFileInput):
+#     template_name = 'file_input_with_preview.html'
+# class FileInputWithPreview(ClearableFileInput):
+#     template_name = 'webadmin/file_input_with_preview.html'
+#
+#     def render(self, name, value, attrs=None, renderer=None):
+#         html = super().render(name, value, attrs, renderer)
+#         preview = self.get_preview(value)
+#         return mark_safe(render_to_string(self.template_name, {
+#             'html': html,
+#             'preview': preview,
+#         }))
+#
+#     def get_preview(self, value):
+#         if not value:
+#             return ''
+#         return mark_safe(f'<p><strong>Preview:</strong> {value.name}</p>')
 
 class JobApplicationForm(forms.ModelForm):
     class Meta:
         model = JobApplication
-        fields = ['name', 'email', 'phone_number', 'resume', 'cover_letter']
+        fields = ['name', 'email', 'phone_number',  'cover_letter']
         widgets = {
+            # 'resume': FileInputWithPreview(attrs={'accept': '.pdf,.doc,.docx'}),
             'cover_letter': forms.Textarea(attrs={'rows': 5}),
         }
+
+
+# class JobApplicationForm(forms.ModelForm):
+#     class Meta:
+#         model = JobApplication
+#         fields = ['name', 'email', 'phone_number', 'resume', 'cover_letter']
+
+    # status = forms.ChoiceField(choices=(
+    #     ('pending', 'Pending'),
+    #     ('accepted', 'Accepted'),
+    #     ('rejected', 'Rejected')
+    # ))
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if email and JobApplication.objects.filter(email=email).exists():

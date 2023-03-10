@@ -81,16 +81,18 @@ def job_application(request):
 
     return render(request, 'core/jobapplication.html', {'form': form})
 
+def all_tutors(request):
+    accepted_applications = JobApplication.objects.filter(status='accepted')
+    return render(request, 'webadmin/alltutors.html', {'tutors': accepted_applications})
 
-
-def alltutors(request):
-    # Get all staff users
-    staff_users = User.objects.filter(is_staff=True)
-
-    context = {
-        'staff_users': staff_users,
-    }
-    return render(request, 'webadmin/alltutors.html', context)
+# def alltutors(request):
+#     # Get all staff users
+#     staff_users = User.objects.filter(is_staff=True)
+#
+#     context = {
+#         'staff_users': staff_users,
+#     }
+#     return render(request, 'webadmin/alltutors.html', context)
 
 
 

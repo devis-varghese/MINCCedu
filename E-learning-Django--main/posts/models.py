@@ -44,7 +44,7 @@ class JobApplication(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone_number = models.CharField(max_length=15)
-    resume = models.FileField(upload_to='media/media/resumes/')
+    # resume = models.FileField(upload_to='media/media/resumes/')
     cover_letter = models.TextField()
     date_applied = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=(
