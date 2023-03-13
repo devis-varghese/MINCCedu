@@ -97,7 +97,7 @@
                             <a href="{% url 'job_application' %}" class="apply-link">Apply as a Tutor</a>
 
 
-                            <a href="{% url 'userlogin' %}" class="login-link">Tutor Login</a>
+                            <a href="{% url 'tutor_login' %}" class="login-link">Tutor Login</a>
   <ul>
     {% for tutor in tutors %}
       <li>{{ tutor.name }} - {{ tutor.email }} - {{ tutor.phone_number }}</li>

@@ -88,6 +88,8 @@ urlpatterns = [
     path('verify_payment/', views.verify_payment, name='verify_payment'), 
     path('allcourses/', views.totalposts, name='all-courses'),
     path('alltutors/', views.all_tutors, name='alltutors'),
+    path('login/', views.tutor_login, name='tutor_login'),
+    path('tutor/dashboard/', views.tutor_dashboard, name='tutor_dashboard'),
     path('apply/', views.job_application, name='job_application'),
 
 

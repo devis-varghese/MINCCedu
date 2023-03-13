@@ -81,6 +81,41 @@ def job_application(request):
 
     return render(request, 'core/jobapplication.html', {'form': form})
 
+@login_required
+def tutor_dashboard(request):
+    # Retrieve the current user's job applications
+    job_applications = request.user.job_applications.all()
+
+    # Filter job applications by status
+    accepted_applications = job_applications.filter(status='accepted')
+    pending_applications = job_applications.filter(status='pending')
+    rejected_applications = job_applications.filter(status='rejected')
+
+    # Render the tutor dashboard template with the job application data
+    return render(request, 'tutordashboard.html', {
+        'accepted_applications': accepted_applications,
+        'pending_applications': pending_applications,
+        'rejected_applications': rejected_applications,
+    })
+
+def tutor_login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None and user.is_active and user.is_tutor:
+                login(request, user)
+                messages.success(request, 'You have successfully logged in!')
+                return redirect('tutor_dashboard')
+            else:
+                messages.error(request, 'Invalid username or password.')
+        else:
+            messages.error(request, 'Invalid username or password.')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'tutorlogin.html', {'form': form})
 def all_tutors(request):
     accepted_applications = JobApplication.objects.filter(status='accepted')
     return render(request, 'webadmin/alltutors.html', {'tutors': accepted_applications})
