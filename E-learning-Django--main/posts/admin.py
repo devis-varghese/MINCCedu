@@ -58,7 +58,7 @@ class JobApplicationAdmin(admin.ModelAdmin):
                 password = get_random_string(length=10)
                 send_mail(
                     f"Job Application Status: {obj.status}",
-                    f"Congratulations, your job application has been accepted!\n\nYour login credentials are:\nUsername: {obj.email}\nPassword: {password}\n\nYou can log in to the tutor dashboard at http://http://127.0.0.1:8000/login/",
+                    f"Congratulations, your job application has been accepted!\n\nYour login credentials are:\nUsername: {obj.email}\nPassword: {password}\n\nYou can log in to the tutor dashboard at http://http://127.0.0.1:8000/tutor_login/",
                     'minccedu@gmail.com',
                     [obj.email],
                     fail_silently=False,

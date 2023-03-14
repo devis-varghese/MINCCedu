@@ -81,6 +81,28 @@ def job_application(request):
 
     return render(request, 'core/jobapplication.html', {'form': form})
 
+
+
+def tutorlogin(request):
+    form = TutorLoginForm()
+    return render(request, 'users/tutorlogin.html', {'form': form})
+
+# def tutor_login(request):
+#     if request.method == 'POST':
+#         email = request.POST.get('email')
+#         password = request.POST.get('password')
+#         user = authenticate(request, email=email, password=password)
+#         if user is not None:
+#             login(request, user)
+#             return redirect('tutor_dashboard') # Replace with the name of your tutor dashboard URL pattern
+#         else:
+#             # Handle invalid login credentials
+#             error_message = 'Invalid email or password'
+#             return render(request, 'users/tutorlogin.html', {'error_message': error_message})
+#     else:
+#         return render(request, 'users/tutorlogin.html')
+
+
 @login_required
 def tutor_dashboard(request):
     # Retrieve the current user's job applications
@@ -98,24 +120,24 @@ def tutor_dashboard(request):
         'rejected_applications': rejected_applications,
     })
 
-def tutor_login(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None and user.is_active and user.is_tutor:
-                login(request, user)
-                messages.success(request, 'You have successfully logged in!')
-                return redirect('tutor_dashboard')
-            else:
-                messages.error(request, 'Invalid username or password.')
-        else:
-            messages.error(request, 'Invalid username or password.')
-    else:
-        form = AuthenticationForm()
-    return render(request, 'tutorlogin.html', {'form': form})
+# def tutor_login(request):
+#     if request.method == 'POST':
+#         form = AuthenticationForm(request, data=request.POST)
+#         if form.is_valid():
+#             username = form.cleaned_data.get('username')
+#             password = form.cleaned_data.get('password')
+#             user = authenticate(username=username, password=password)
+#             if user is not None and user.is_active and user.is_tutor:
+#                 login(request, user)
+#                 messages.success(request, 'You have successfully logged in!')
+#                 return redirect('tutor_dashboard')
+#             else:
+#                 messages.error(request, 'Invalid username or password.')
+#         else:
+#             messages.error(request, 'Invalid username or password.')
+#     else:
+#         form = AuthenticationForm()
+#     return render(request, 'tutorlogin.html', {'form': form})
 def all_tutors(request):
     accepted_applications = JobApplication.objects.filter(status='accepted')
     return render(request, 'webadmin/alltutors.html', {'tutors': accepted_applications})

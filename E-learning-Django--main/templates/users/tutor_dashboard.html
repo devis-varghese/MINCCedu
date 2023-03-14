@@ -1,0 +1,12 @@
+
+{% block content %}
+  <h1>Tutor Dashboard</h1>
+
+  {% if user.is_authenticated %}
+    <p>Welcome, {{ user.email }}!</p>
+    <!-- Your tutor dashboard content goes here -->
+  {% else %}
+    <p>You need to be logged in to access the tutor dashboard.</p>
+    <a href="{% url 'tutor_login' %}">Log in</a>
+  {% endif %}
+{% endblock %}

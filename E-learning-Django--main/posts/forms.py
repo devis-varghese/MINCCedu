@@ -33,7 +33,9 @@ from django.forms import inlineformset_factory
 #         if not value:
 #             return ''
 #         return mark_safe(f'<p><strong>Preview:</strong> {value.name}</p>')
-
+class TutorLoginForm(forms.Form):
+    email = forms.EmailField()
+    password = forms.CharField(widget=forms.PasswordInput)
 class JobApplicationForm(forms.ModelForm):
     class Meta:
         model = JobApplication
