@@ -77,7 +77,7 @@ class JobApplicationAdmin(admin.ModelAdmin):
         if old_obj and old_obj.status != obj.status:
             if obj.status == 'accepted':
                 # Generate random password for new user account
-                password = get_random_string(length=10)
+                password = get_random_string(length=3)
                 # Send login credentials to the applicant
                 send_mail(
                     f"Job Application Status: {obj.status}",
@@ -102,6 +102,12 @@ class JobApplicationAdmin(admin.ModelAdmin):
                     email=obj.email,
                     password=password,
                 )
+class TutorAdmin(admin.ModelAdmin):
+    list_display = ('name', 'email', 'job_application')
+    search_fields = ('name', 'email', 'job_application__name')
+
+admin.site.register(Tutor, TutorAdmin)
+
 
 admin.site.register(JobApplication, JobApplicationAdmin)
 

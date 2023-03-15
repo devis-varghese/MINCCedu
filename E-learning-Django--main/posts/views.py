@@ -83,48 +83,34 @@ def job_application(request):
 
     return render(request, 'core/jobapplication.html', {'form': form})
 
-def tutorlogin(request):
-        form = TutorLoginForm()
-        if request.method == 'POST':
-            email = request.POST.get('email')
-            password = request.POST.get('password')
-            user = authenticate(request, email=email, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('tutor_dashboard')
-            else:
-                # Handle invalid login credentials
-                error_message = 'Invalid email or password'
-                messages.error(request, error_message)  # set error message using django message framework
-                return render(request, 'users/tutorlogin.html', {'form': form})
-        else:
-            return render(request, 'users/tutorlogin.html', {'form': form})
 
-    #     user = authenticate(request, email=email, password=password)
-    #     if user is not None:
-    #         login(request, user)
-    #         return redirect('tutor_dashboard')  # Replace with the name of your tutor dashboard URL pattern
-    #     else:
-    #         # Handle invalid login credentials
-    #         error_message = 'Invalid email or password'
-    #         return render(request, 'users/tutorlogin.html', {'error_message': error_message})
-    # else:
-    #        return render(request, 'users/tutorlogin.html', {'form': form})
-
-# def tutor_login(request):
+# def tutorlogin(request):
 #     if request.method == 'POST':
-#         email = request.POST.get('email')
-#         password = request.POST.get('password')
-#         user = authenticate(request, email=email, password=password)
-#         if user is not None:
-#             login(request, user)
-#             return redirect('tutor_dashboard') # Replace with the name of your tutor dashboard URL pattern
-#         else:
-#             # Handle invalid login credentials
-#             error_message = 'Invalid email or password'
-#             return render(request, 'users/tutorlogin.html', {'error_message': error_message})
+#         # Authenticate and log in the user
+#         email = request.POST['username']
+#         password = request.POST['password']
+#         tutor = authenticate(request, email=email, password=password)
+#         if tutor is not None:
+#             login(request, tutor)
+#             # Redirect to the dashboard URL by default, or to the 'next' parameter if it exists
+#             next_url = request.GET.get('next', 'tutor_dashboard')
+#             return redirect(next_url)
 #     else:
-#         return render(request, 'users/tutorlogin.html')
+#         # Display the login form
+#         return render(request, 'users/tutorlogin.html', {'form': AuthenticationForm()})
+def tutorlogin(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, request.POST)
+        if form.is_valid():
+            email = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            tutor = authenticate(request, email=email, password=password)
+            if tutor is not None:
+                login(request, tutor)
+                return redirect('tutor_dashboard')
+    else:
+        form = AuthenticationForm(request)
+    return render(request, 'users/tutorlogin.html', {'form': form})
 
 
 @login_required(login_url='tutor_login')

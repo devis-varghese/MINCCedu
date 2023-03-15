@@ -42,8 +42,8 @@
     margin-bottom: 30px;
   }
 </style>
-  </head><h1>Tutor Login</h1>
-  <form method="post" action="{% url 'tutor_login' %}">
+ <h1>Tutor Login</h1>
+  <form method="post" action="{% url 'tutor_login' %}?next={{ request.GET.next }}">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Log in</button>
