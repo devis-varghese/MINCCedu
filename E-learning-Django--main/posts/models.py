@@ -33,18 +33,11 @@ class enrolledstudents(models.Model):
     def __str__(self):
         return self.user.first_name
 
-# class JobApplication(models.Model):
-#     name = models.CharField(max_length=100)
-#     email = models.EmailField()
-#     phone = models.CharField(max_length=20)
-#     education = models.TextField()
-#     experience = models.TextField()
-#     created_at = models.DateTimeField(auto_now_add=True)
 class JobApplication(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
     phone_number = models.CharField(max_length=15)
-    # resume = models.FileField(upload_to='media/media/resumes/')
+    resume = models.FileField(upload_to='media/resumes/')
     cover_letter = models.TextField()
     date_applied = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=(
@@ -56,16 +49,15 @@ class JobApplication(models.Model):
     def __str__(self):
         return f"{self.name} - {self.date_applied}"
 
-class tutor(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_pic = models.ImageField(upload_to='media/profile_pic', null=True, blank=True)
-    resume = models.FileField(upload_to='media/certificate', blank=True, null=True)
-    mobile = models.CharField(max_length=20, null=False)
-    Country = models.CharField(max_length=20, null=False, blank=True)
-
+class Tutor(models.Model):
+    job_application = models.ForeignKey(JobApplication, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    password = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.user.first_name
+        return self.name
+
 
 class Category(models.Model):
     parent = models.ForeignKey('self', related_name='children', on_delete=models.CASCADE, blank = True, null=True)

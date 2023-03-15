@@ -1,3 +1,5 @@
+from django.contrib.auth.hashers import check_password
+
 from .models import *
 from django.shortcuts import get_object_or_404, redirect, render
 from .forms import *
@@ -81,11 +83,33 @@ def job_application(request):
 
     return render(request, 'core/jobapplication.html', {'form': form})
 
-
-
 def tutorlogin(request):
-    form = TutorLoginForm()
-    return render(request, 'users/tutorlogin.html', {'form': form})
+        form = TutorLoginForm()
+        if request.method == 'POST':
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+            user = authenticate(request, email=email, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('tutor_dashboard')
+            else:
+                # Handle invalid login credentials
+                error_message = 'Invalid email or password'
+                messages.error(request, error_message)  # set error message using django message framework
+                return render(request, 'users/tutorlogin.html', {'form': form})
+        else:
+            return render(request, 'users/tutorlogin.html', {'form': form})
+
+    #     user = authenticate(request, email=email, password=password)
+    #     if user is not None:
+    #         login(request, user)
+    #         return redirect('tutor_dashboard')  # Replace with the name of your tutor dashboard URL pattern
+    #     else:
+    #         # Handle invalid login credentials
+    #         error_message = 'Invalid email or password'
+    #         return render(request, 'users/tutorlogin.html', {'error_message': error_message})
+    # else:
+    #        return render(request, 'users/tutorlogin.html', {'form': form})
 
 # def tutor_login(request):
 #     if request.method == 'POST':
@@ -103,23 +127,10 @@ def tutorlogin(request):
 #         return render(request, 'users/tutorlogin.html')
 
 
-@login_required
+@login_required(login_url='tutor_login')
 def tutor_dashboard(request):
-    # Retrieve the current user's job applications
-    job_applications = request.user.job_applications.all()
-
-    # Filter job applications by status
-    accepted_applications = job_applications.filter(status='accepted')
-    pending_applications = job_applications.filter(status='pending')
-    rejected_applications = job_applications.filter(status='rejected')
-
-    # Render the tutor dashboard template with the job application data
-    return render(request, 'tutordashboard.html', {
-        'accepted_applications': accepted_applications,
-        'pending_applications': pending_applications,
-        'rejected_applications': rejected_applications,
-    })
-
+    # Add any logic for the tutor dashboard here
+    return render(request, 'users/tutor_dashboard.html')
 # def tutor_login(request):
 #     if request.method == 'POST':
 #         form = AuthenticationForm(request, data=request.POST)

@@ -39,23 +39,12 @@ class TutorLoginForm(forms.Form):
 class JobApplicationForm(forms.ModelForm):
     class Meta:
         model = JobApplication
-        fields = ['name', 'email', 'phone_number',  'cover_letter']
+        fields = ['name', 'email', 'phone_number', 'resume',  'cover_letter']
         widgets = {
-            # 'resume': FileInputWithPreview(attrs={'accept': '.pdf,.doc,.docx'}),
+
             'cover_letter': forms.Textarea(attrs={'rows': 5}),
         }
 
-
-# class JobApplicationForm(forms.ModelForm):
-#     class Meta:
-#         model = JobApplication
-#         fields = ['name', 'email', 'phone_number', 'resume', 'cover_letter']
-
-    # status = forms.ChoiceField(choices=(
-    #     ('pending', 'Pending'),
-    #     ('accepted', 'Accepted'),
-    #     ('rejected', 'Rejected')
-    # ))
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if email and JobApplication.objects.filter(email=email).exists():
