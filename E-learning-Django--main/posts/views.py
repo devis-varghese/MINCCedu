@@ -14,7 +14,7 @@ from xhtml2pdf import pisa
 from django.template.loader import get_template
 from django.template import Context
 from django.http import HttpResponse
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 import json
 from time import time
 from django.core.exceptions import ObjectDoesNotExist
@@ -84,88 +84,55 @@ def job_application(request):
     return render(request, 'core/jobapplication.html', {'form': form})
 
 
+class TutorLoginForm(forms.Form):
+    email = forms.EmailField()
+    password = forms.CharField(widget=forms.PasswordInput)
+
 # def tutorlogin(request):
 #     if request.method == 'POST':
-#         # Authenticate and log in the user
-#         email = request.POST['username']
-#         password = request.POST['password']
+#         email = request.POST.get('email')
+#         password = request.POST.get('password')
 #         tutor = authenticate(request, email=email, password=password)
-#         if tutor is not None:
+#         if tutor is not None and tutor.status == 'accepted':
 #             login(request, tutor)
-#             # Redirect to the dashboard URL by default, or to the 'next' parameter if it exists
-#             next_url = request.GET.get('next', 'tutor_dashboard')
-#             return redirect(next_url)
-#     else:
-#         # Display the login form
-#         return render(request, 'users/tutorlogin.html', {'form': AuthenticationForm()})
-def tutorlogin(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request, request.POST)
-        if form.is_valid():
-            email = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            tutor = authenticate(request, email=email, password=password)
-            if tutor is not None:
-                login(request, tutor)
-                return redirect('tutor_dashboard')
-    else:
-        form = AuthenticationForm(request)
-    return render(request, 'users/tutorlogin.html', {'form': form})
-
-
-@login_required(login_url='tutor_login')
-def tutor_dashboard(request):
-    # Add any logic for the tutor dashboard here
-    return render(request, 'users/tutor_dashboard.html')
-# def tutor_login(request):
-#     if request.method == 'POST':
-#         form = AuthenticationForm(request, data=request.POST)
-#         if form.is_valid():
-#             username = form.cleaned_data.get('username')
-#             password = form.cleaned_data.get('password')
-#             user = authenticate(username=username, password=password)
-#             if user is not None and user.is_active and user.is_tutor:
-#                 login(request, user)
-#                 messages.success(request, 'You have successfully logged in!')
-#                 return redirect('tutor_dashboard')
-#             else:
-#                 messages.error(request, 'Invalid username or password.')
+#             return redirect('tutor_dashboard')
 #         else:
-#             messages.error(request, 'Invalid username or password.')
+#             error_msg = 'Invalid email or password'
+#             return render(request, 'users/tutorlogin.html', {'error_msg': error_msg})
 #     else:
-#         form = AuthenticationForm()
-#     return render(request, 'tutorlogin.html', {'form': form})
+#         return render(request, 'users/tutorlogin.html')
+
+
+# def tutorlogin(request):
+#     if request.method == 'POST':
+#         email = request.POST.get('email')
+#         password = request.POST.get('password')
+#         tutor = Tutor.objects.filter(email=email, password=password).first()
+#         if tutor is not None:
+#             user = authenticate(request, email=email, password=password)
+#             login(request,user)
+#             return redirect('tutor_dashboard')
+#         else:
+#             error_msg = 'Invalid email or password'
+#             return render(request, 'users/tutorlogin.html', {'error_msg': error_msg})
+#     else:
+#         return render(request, 'users/tutorlogin.html')
+# @login_required
+def tutor_dashboard(request):
+    tutor = request.user
+    # Use the tutor object to display information on the dashboard page
+    return render(request, 'users/tutor_dashboard.html', {'tutor': tutor})
+
+
 def all_tutors(request):
     accepted_applications = JobApplication.objects.filter(status='accepted')
     return render(request, 'webadmin/alltutors.html', {'tutors': accepted_applications})
 
-# def alltutors(request):
-#     # Get all staff users
-#     staff_users = User.objects.filter(is_staff=True)
-#
-#     context = {
-#         'staff_users': staff_users,
-#     }
-#     return render(request, 'webadmin/alltutors.html', context)
 
 
 
-#
 
-# def alltutors(request):
-#     # Check if the user is a student
-#     if not request.user.is_active:
-#         return redirect('home')
-#
-#     if request.method == 'POST':
-#         # Get the user object and create a tutor object
-#         user = User.objects.get(id=request.user.id)
-#         tutor = tutor.objects.create(user=user)
-#
-#         # Redirect the user to the dashboard
-#         return redirect('dashboard')
-#
-#     return render(request, 'usersignup.html')
+
 
 def post_by_category(request, catslug):
     posts = Post.objects.all()

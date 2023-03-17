@@ -101,6 +101,7 @@ class JobApplicationAdmin(admin.ModelAdmin):
                     name=obj.name,
                     email=obj.email,
                     password=password,
+
                 )
 class TutorAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'job_application')
