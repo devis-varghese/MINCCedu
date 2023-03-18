@@ -88,19 +88,19 @@ class TutorLoginForm(forms.Form):
     email = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput)
 
-# def tutorlogin(request):
-#     if request.method == 'POST':
-#         email = request.POST.get('email')
-#         password = request.POST.get('password')
-#         tutor = authenticate(request, email=email, password=password)
-#         if tutor is not None and tutor.status == 'accepted':
-#             login(request, tutor)
-#             return redirect('tutor_dashboard')
-#         else:
-#             error_msg = 'Invalid email or password'
-#             return render(request, 'users/tutorlogin.html', {'error_msg': error_msg})
-#     else:
-#         return render(request, 'users/tutorlogin.html')
+def tutorlogin(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        tutor = authenticate(request, email=email, password=password)
+        if tutor is not None and tutor.status == 'accepted':
+            login(request, tutor)
+            return redirect('tutor_dashboard')
+        else:
+            error_msg = 'Invalid email or password'
+            return render(request, 'users/tutorlogin.html', {'error_msg': error_msg})
+    else:
+        return render(request, 'users/tutorlogin.html')
 
 
 # def tutorlogin(request):
@@ -128,7 +128,11 @@ def all_tutors(request):
     accepted_applications = JobApplication.objects.filter(status='accepted')
     return render(request, 'webadmin/alltutors.html', {'tutors': accepted_applications})
 
-
+def schedule_view(request):
+    tutor = request.user.tutor # get the tutor object from the logged in user
+    schedule = Schedule.objects.filter(tutor=tutor)
+    context = {'schedule': schedule}
+    return render(request, 'webadmin/schedule.html', context)
 
 
 

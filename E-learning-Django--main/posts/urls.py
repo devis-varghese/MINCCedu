@@ -35,16 +35,16 @@ urlpatterns = [
     path('webadmin/editcourse/<int:id>', views.edit_course, name='editcourse'),
     path('webadmin/deletecourse/<int:id>', views.delete_course, name='deletecourse'),
     path('webadmin/add_time/', views.add_time, name='add_time'),
-    path('webadmin/edit_time/<int:id>', views.edit_time, name='edit_time'),
-    path('webadmin/delete_time/<int:id>', views.delete_time, name='delete_time'),
+    path('webadmin/edit_time/', views.edit_time, name='edit_time'),
+    path('webadmin/delete_time/', views.delete_time, name='delete_time'),
     path('webadmin/alltime/', views.alltime, name='alltime'),
     path('webadmin/add_features/', views.add_features, name='add_features'),
     path('webadmin/edit_features/<int:id>', views.edit_features, name='edit_features'),
     path('webadmin/delete_features/<int:id>', views.delete_features, name='delete_features'),
     path('webadmin/allfeatures/', views.allfeatures, name='allfeatures'),
     path('webadmin/add_curriculam/', views.add_curriculam, name='add_curriculam'),
-    path('webadmin/edit_curriculam/<int:id>', views.edit_curriculam, name='edit_curriculam'),
-    path('webadmin/delete_curriculam/<int:id>', views.delete_curriculam, name='delete_curriculam'),
+    path('webadmin/edit_curriculam/', views.edit_curriculam, name='edit_curriculam'),
+    path('webadmin/delete_curriculam/', views.delete_curriculam, name='delete_curriculam'),
     path('webadmin/allcurriculam/', views.allcurriculam, name='allcurriculam'),
     path('webadmin/add_subcatg/', views.add_subcatg, name='add_subcatg'),
     path('webadmin/edit_subcatg/<int:id>', views.edit_subcatg, name='edit_subcatg'),
@@ -62,6 +62,7 @@ urlpatterns = [
     path('userdetail/<int:id>', views.userdetails, name='userdetails'),
     path('edituserprofile/', views.edit_profile, name='editprofile'),
     path('changepassword/', views.change_password, name='changepassword'),
+
 
 
     #Public urls
@@ -88,8 +89,9 @@ urlpatterns = [
     path('verify_payment/', views.verify_payment, name='verify_payment'), 
     path('allcourses/', views.totalposts, name='all-courses'),
     path('alltutors/', views.all_tutors, name='alltutors'),
-    # path('tutorlogin/', views.tutorlogin, name='tutor_login'),
+    path('tutorlogin/', views.tutorlogin, name='tutor_login'),
     path('tutordashboard/', views.tutor_dashboard, name='tutor_dashboard'),
+    path('schedule/', views.schedule_view, name='schedule'),
     path('apply/', views.job_application, name='job_application'),
 
 

@@ -8,6 +8,7 @@ import os
 from edureka import settings
 from django.dispatch import receiver
 from django.db.models.signals import pre_save
+from django.utils import timezone
 
 @receiver(pre_save, sender=User)
 def set_new_user_inactive(sender, instance, **kwargs):
@@ -57,6 +58,14 @@ class Tutor(models.Model):
 
     def __str__(self):
         return self.name
+
+
+
+class Schedule(models.Model):
+    tutor = models.ForeignKey(Tutor, on_delete=models.CASCADE)
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+    date_created = models.DateTimeField(default=timezone.now)
 
 
 class Category(models.Model):
