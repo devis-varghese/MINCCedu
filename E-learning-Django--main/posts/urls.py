@@ -81,6 +81,7 @@ urlpatterns = [
     path('<str:category_slug>/<str:slug>', views.post_details, name='details'),
     path('videos/', views.videos, name='videos'),
     path('users/yourcoursesvideo/<str:slug>/', views.paid_video, name='paid_video'),
+    path('course/<slug:slug>/', views.enter_course, name='enter_course'),
 
     path('courses/', views.courses, name='courses'),            
 

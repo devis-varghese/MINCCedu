@@ -1,9 +1,12 @@
 
 
 
-
+{% include 'core/base2.html' %}
 {% block content %}
+
+
 {% load crispy_forms_tags %}
+
 <head>
     <style>
   /* Style for the form container */
@@ -51,6 +54,7 @@
 </head>
 
   <h1>Job Application Form</h1>
+{% endblock %}
    <form method='post' enctype="multipart/form-data">
                {% csrf_token %}
                {{form|crispy}}
@@ -60,4 +64,3 @@
                {% endif %}
                 <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
-{% endblock %}

@@ -334,6 +334,12 @@ def userdashboard(request):
         return render(request, 'users/index.html', context={'carts':carts,'orders':orders})
     context = {'carts':carts,'customer':customer, 'orders':orders}
     return render(request, 'users/index.html', context)
+def enter_course(request, slug):
+    allpost = get_object_or_404(Post, slug=slug)
+    context = {'allpost': allpost}
+    # You can add your custom logic here to enter the user into the course
+    return render(request, 'webadmin/enter_course.html', context)
+
 
 def userprofile(request):
     profile = enrolledstudents.objects.get(user_id=request.user.id)

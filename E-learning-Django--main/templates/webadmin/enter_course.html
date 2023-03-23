@@ -12,7 +12,7 @@
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <title>Hello, {{ user.email }} </title>
+    <title>Hello, {{request.user.first_name}}!</title>
   </head>
   <body>
     <!---navbar-section--- -->
@@ -27,39 +27,20 @@
 {% include 'users/sidebar.html' %}
     <section class="dashboard-heading">
       <div class="container">
-         <h1 class="text-center mt-4 mb-5">Tutor Dashboard</h1>
+         <h1 class="text-center mt-4 mb-5"></h1>
         <div class="row">
            <div class="col-md-8">
            <div class="row">
               <div class="col-md-12">
           <div class="main-dashboard">
 
-
-              {% if user.is_authenticated %}
-<p>Welcome, {{ user.email }}. This is your official dashboard where you can upload study materials for {{ user.tutor.assigned_course }} course.</p>
-              {% endif %}
-              <h2>Your Assigned Course</h2>
-            <ul>
-                {% for course in tutor.assigned_courses.all %}
-                <p>Assigned Course: {{ course.title }}</p>
-                {% endfor %}
-                    <!-- Navigation section for adding curriculum -->
-    <h2>Add Curriculum</h2>
-    <a href="{% url 'add_curriculam' %}">Add New Curriculum</a>
-    <a href="{% url 'edit_curriculam' %}">Edit Curriculum</a>
-    <a href="{% url 'delete_curriculam' %}">Delete Curriculum</a>
-
-    <!-- Navigation section for adding timings -->
-    <h2>Add Timings</h2>
-    <a href="{% url 'add_time' %}">Add New Timings</a>
-    <a href="{% url 'edit_time' %}">Edit Timings</a>
-    <a href="{% url 'delete_time' %}">Delete Timings</a>
+             <ul>
               {% for i in orders %}
               {% for obj in i.orderitems.all %}
-             <a><b>Course Name:-</b> {{ obj }}</a>
+             <a href="{% url 'paid_video' obj.item.slug %}"><b>Course Name:-</b> {{ obj }}</a>
 
 
-             <li><a href="{% url 'paid_video' obj.item.slug %}">Watch Videos</a></li>
+
 
 
 
@@ -115,8 +96,3 @@ function w3_close() {
 
   </body>
 </html>
-
-
-
-
-

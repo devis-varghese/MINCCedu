@@ -50,11 +50,16 @@ class JobApplication(models.Model):
     def __str__(self):
         return f"{self.name} - {self.date_applied}"
 
+
+
+
 class Tutor(models.Model):
     job_application = models.ForeignKey(JobApplication, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     email = models.EmailField()
     password = models.CharField(max_length=100)
+    assigned_courses = models.ManyToManyField('Post', blank=True, related_name='assigned_tutors')
+
 
     def __str__(self):
         return self.name
@@ -156,6 +161,7 @@ class Post(models.Model):
     maincourse = models.ManyToManyField(MainCourse, blank=True, related_name='posts')
     price = models.IntegerField(default=0)
     disc = models.BooleanField(default=False, verbose_name='Add In Disclaimer')
+    assigned_tutor = models.ForeignKey('Tutor', on_delete=models.CASCADE, blank=True, null=True,related_name='assigned_posts')
     
     def __str__(self):
         return self.title    

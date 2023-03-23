@@ -69,6 +69,8 @@
         </div>
     </section>
 
+
+
     <section class="second-navbar">
         <div class="container">
         <div class="row">
@@ -77,46 +79,32 @@
                   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                   </button>
-                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                      <ul class="navbar-nav mr-auto">
-                          <li class="dropdown">
-<!--                              <a class="dropdown-toggle dropmain" href="#" id="navbarDropdwn" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Browse Categories</a>-->
-                              <ul class="dropdown-menu exdrop drop1" aria-labelledby="navbarDropdown">
-                                {% for i in catg_parent %}
-                                <li class="dropdown show">
-                                {% if i.children.all %}
-                                <a class="" href="{% url 'allcatpost' i.slug %}" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{i.title|title}}
-                                {% comment %} <i class="fa fa-angle-right" aria-hidden="true"></i> {% endcomment %}
-                                </a>
-                                {% else %}
-                                {% endif %}
+
+                            <a href="{% url 'job_application' %}" class="apply-link">Apply as a Tutor</a>
+
+
+                            <a href="{% url 'tutor_login' %}" class="login-link">Tutor Login</a>
+
                                 <ul class="dropdown-menu drop-6 exdrop2 drop2" aria-labelledby="navbarDropdown1">
-                                {% for obj in i.children.all %}
-                                {% if more == 'True' %}
-                                {% else %}
-                                {% endif %}
-                                <li class="dropdown show"> <a class="" href="{% url 'subcat' obj.slug %}" id="navbarDropdown2"
-                            data-toggle="" aria-haspopup="true" aria-expanded="false"> {{obj.title}}
-                            {% comment %} <i class="fa fa-angle-right" aria-hidden="true"></i> {% endcomment %}
+
                             </a>
                           <ul class="dropdown-menu drop3" aria-labelledby="navbarDropdown2">
-                            {% comment %} <li><a href="{% url 'allcatpost' i.slug %}"><img src="" width="50" height="50"></a></li> {% endcomment %}
                             <div class="masterbox hidden-xs">
                               <div class="title-section">
                                 <hr>
-                                <span class="coursetype">{{i.title}}</span>
+                                <span class="coursetype"></span>
                               </div>
                               <div class="images-text drop4">
-                              {% if not obj.logo %}
-                              <a href="{% url 'allcatpost' obj.slug %}">
+
+
                                 <span>
                                   <i class="fa fa-graduation-cap" aria-hidden="true"></i>
                                 </span>
                                 <span style="padding-left:25px; font-weight:600;">
-                                  {{obj.title}}
+
                                 </span>
                                 </a>
-                            {% else %}
+
                               <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                 <ol class="carousel-indicators">
                                   <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -125,51 +113,33 @@
                                 </ol>
                                 <div class="carousel-inner">
                                   <div class="carousel-item active">
-                                   <a href="{% url 'allcatpost' obj.slug %}"> <img class="d-block w-100" src="{{obj.logo.url}}"> </a>
                                   </div>
-                                  {% if not obj.logo1 %}
-                                  {% else %}
+
                                   <div class="carousel-item">
-                                  <a href="{% url 'allcatpost' obj.slug %}">  <img class="d-block w-100" src="{{obj.logo1.url}}"></a>
                                   </div>
-                                  {% endif %}
-                                  {% if not obj.logo2 %}
-                                  {% else %}
+
                                   <div class="carousel-item">
-                                  <a href="{% url 'allcatpost' obj.slug %}">  <img class="d-block w-100" src="{{obj.logo2.url}}"></a>
                                   </div>
-                                  {% endif %}
+
                                 </div>
                               </div>
-                              {% endif %}
+
                               </div>
                              </div>
                             </a>
-                          {% comment %} {% endif %}   {% endcomment %}
                           </ul>
                         </li>
-                                {% endfor %}
                                 </ul>
                               </li>
-                              {% endfor %}
                               </ul>
                           </li>
-                          {% for i in categoriess %}
-                          {% if not i.children.all %}
-                          <li><a href="{% url 'allcatpost' i.slug %}">{{i.title}}</a></li>
-                          {% endif %}
-                          {% endfor %}
-                                 {% comment %} <li class="dropdown" style="position:absolute; right:-100px;">
-                              <a class="" href="#" id="navbarDropdown" role="button" data-toggle="" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars" aria-hidden="true"></i></a>
-                              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            {% for i in more %}
-                              <li class="dropdown"> {% endcomment %}
-                                {% comment %} <a href="{% url 'allcatpost' i.slug %}" >{{i.title|title}}</a>  {% endcomment %}
-                                {% comment %} <a href="{% url 'subcat' i.slug %}" >{{i.title|title}}</a>
+
+
+
                               </li>
-                            {% endfor %}
+
                               </ul>
-                          </li>                      {% endcomment %}
+                          </li>
                       </ul>
                   </div>
             </nav>
