@@ -44,16 +44,16 @@
                 <p>Assigned Course: {{ course.title }}</p>
                 {% endfor %}
                     <!-- Navigation section for adding curriculum -->
-    <h2>Add Curriculum</h2>
-    <a href="{% url 'add_curriculam' %}">Add New Curriculum</a>
-    <a href="{% url 'edit_curriculam' %}">Edit Curriculum</a>
-    <a href="{% url 'delete_curriculam' %}">Delete Curriculum</a>
+    <h2>Add study material</h2>
+    <a href="{% url 'add_curriculam' %}">Add New Material</a>
+<!--    <a href="{% url 'edit_curriculam' %}">Edit Curriculum</a>-->
+    <a href="{% url 'delete_curriculam' %}">Delete Material</a>
 
     <!-- Navigation section for adding timings -->
-    <h2>Add Timings</h2>
-    <a href="{% url 'add_time' %}">Add New Timings</a>
-    <a href="{% url 'edit_time' %}">Edit Timings</a>
-    <a href="{% url 'delete_time' %}">Delete Timings</a>
+    <h2>Add Live Class link</h2>
+    <a href="{% url 'add_time' %}">Add New Live Link</a>
+<!--    <a href="{% url 'edit_time' %}">Edit Timings</a>-->
+    <a href="{% url 'delete_time' %}">Delete Live Link</a>
               {% for i in orders %}
               {% for obj in i.orderitems.all %}
              <a><b>Course Name:-</b> {{ obj }}</a>

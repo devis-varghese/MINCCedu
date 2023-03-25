@@ -340,6 +340,35 @@ def enter_course(request, slug):
     # You can add your custom logic here to enter the user into the course
     return render(request, 'webadmin/enter_course.html', context)
 
+def paid_video(request, slug):
+    allpost = get_object_or_404(Post, slug=slug)
+    vid = video.objects.filter(post=allpost)
+    context = {'allpost':allpost, 'vid':vid}
+    return render(request, 'users/video.html', context)
+
+def live_class(request, slug):
+    allpost = get_object_or_404(Post, slug=slug)
+    live_classes = LiveClass.objects.filter(post=allpost)
+    context = {'allpost': allpost, 'live_classes': live_classes}
+    return render(request, 'webadmin/live_class.html', context)
+
+def study_material(request, slug):
+    allpost = get_object_or_404(Post, slug=slug)
+    study_materials = StudyMaterial.objects.filter(post=allpost)
+    context = {'allpost': allpost, 'study_materials': study_materials}
+    return render(request, 'webadmin/study_material.html', context)
+
+# def course_details(request, slug):
+#     allpost = get_object_or_404(Post, slug=slug)
+#     vid = video.objects.filter(post=allpost)
+#     context = {'allpost': allpost, 'vid': vid}
+#
+#     if request.method == 'POST':
+#         # Custom logic to enter user into course goes here
+#         pass
+#
+#     return render(request, 'webadmin/enter_course.html', context)
+
 
 def userprofile(request):
     profile = enrolledstudents.objects.get(user_id=request.user.id)
@@ -720,11 +749,7 @@ def delete_video(request, id):
 #     context = {'video':vid}
 #     return render(request, 'webadmin/allvideo.html', context)
 
-def paid_video(request, slug):
-    allpost = get_object_or_404(Post, slug=slug)
-    vid = video.objects.filter(post=allpost)
-    context = {'allpost':allpost, 'vid':vid}
-    return render(request, 'users/video.html', context)
+
 
 
 

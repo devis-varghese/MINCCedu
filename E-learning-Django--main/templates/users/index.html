@@ -41,9 +41,10 @@
              <a><b>Course Name:-</b> {{ obj }}</a>
 
 
-<!--             <li><a href="{% url 'paid_video' obj.item.slug %}">Watch Videos</a></li>-->
-                <li><a href="{% url 'enter_course' obj.item.slug %}">Enter into your course</a></li>
 
+                <li><a href="{% url 'enter_course' obj.item.slug %}">Get Live Class link</a></li>
+                 <li><a href="{% url 'paid_video' obj.item.slug %}">Watch Videos</a></li>
+                    <li><a href="{% url 'paid_video' obj.item.slug %}">Get Study Materials</a></li>
              
 
              
