@@ -9,6 +9,7 @@ from edureka import settings
 from django.dispatch import receiver
 from django.db.models.signals import pre_save
 from django.utils import timezone
+from embed_video.fields import EmbedVideoField
 
 @receiver(pre_save, sender=User)
 def set_new_user_inactive(sender, instance, **kwargs):
@@ -146,12 +147,12 @@ class Post(models.Model):
     slug = AutoSlugField(populate_from='title', max_length=500, unique=True, null=False)
     image = models.ImageField(upload_to='media/post')
 
-    logo = models.ImageField(upload_to='media/post') #If user want to add university logo(Slider and Post) 
+    # logo = models.ImageField(upload_to='media/post') #If user want to add university logo(Slider and Post)
     desc = RichTextField(blank=True, null=True)
     #for live classes or offline classes
 
     youtube = models.URLField(max_length=500, default='' )
-    author = models.CharField(max_length=20, default="admin" )
+    # author = models.CharField(max_length=20, default="admin" )
     date = models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, default=1, related_name="posts")
     subcategory = models.ForeignKey(subcat, on_delete=models.CASCADE, default=1, related_name="subcat", blank=True, null=True)
@@ -242,30 +243,28 @@ class video(models.Model):
     title = models.CharField(max_length=100, null=False)
     post = post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='videos')
     serial_number = models.IntegerField(null=False)
-    video_id = models.CharField(max_length=100)
+    # video_id = models.CharField(max_length=100)
+    video_id = EmbedVideoField()
+
     is_preview = models.BooleanField(default=False)
     desc = RichTextField(blank=True, null=True)
 
     def __str__(self):
         return self.title
 
-    class LiveClass(models.Model):
-        title = models.CharField(max_length=100, null=False)
-        post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='live_classes')
-        serial_number = models.IntegerField(null=False)
-        video_id = models.CharField(max_length=100)
-        is_preview = models.BooleanField(default=False)
-        desc = RichTextField(blank=True, null=True)
 
-        def __str__(self):
-            return self.title
+class LiveClass(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='live_classes')
+    url = models.URLField(max_length=200)
+    def __str__(self):
+        return self.url
 
-    class StudyMaterial(models.Model):
-        title = models.CharField(max_length=100, null=False)
-        post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='study_materials')
-        file = models.FileField(upload_to='study_materials/')
-        desc = RichTextField(blank=True, null=True)
+class StudyMaterial(models.Model):
+    title = models.CharField(max_length=100, null=False)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='study_materials')
+    file = models.FileField(upload_to='study_materials/')
+    desc = RichTextField(blank=True, null=True)
 
-        def __str__(self):
-            return self.title
+    def __str__(self):
+        return self.title
 

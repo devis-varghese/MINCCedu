@@ -95,7 +95,9 @@ urlpatterns = [
     path('tutorlogin/', views.tutorlogin, name='tutor_login'),
     path('tutordashboard/', views.tutor_dashboard, name='tutor_dashboard'),
     path('schedule/', views.schedule_view, name='schedule'),
+    path('my-opencv-view/', views.render_opencv, name='my-opencv-view'),
     path('apply/', views.job_application, name='job_application'),
+
 
 
 

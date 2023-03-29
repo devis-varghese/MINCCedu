@@ -73,10 +73,34 @@
        </div>
     </section>
 
+
     <!-- Video-section -->
+    <button onclick="enterVR()" style="margin :20px 0 0 130px;">Enter into VR</button>
+
+<style>
+button {
+   /* Adjust this value to move the button more or less to the right */
+}
+</style>
+
+<script>
+function enterVR(){
+    if (navigator.xr) {
+    navigator.xr.requestDevice().then((device) => {
+      device.supportsSession({ immersive: true, exclusive: true }).then(() => {
+        device.requestSession({ immersive: true }).then((session) => {
+          // Enter VR mode and do something in VR
+        });
+      });
+    });
+  }
+}
+</script>
+
         <div class="vid-main-wrapper clearfix mt-5 pt-4">
         <div class="container">
-        <div class="row">
+        <div class="row" >
+
         <!-- THE YOUTUBE PLAYER -->
         <div class="col-lg-9 col-12">
         <div class="vid-container">

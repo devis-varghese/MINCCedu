@@ -183,6 +183,14 @@ class videoform(forms.ModelForm):
         model = video
         fields = '__all__'
 
+class LiveClassForm(forms.ModelForm):
+    class Meta:
+        model = LiveClass
+        fields = ['url']
+        widgets = {
+            'url': forms.URLInput(attrs={'class': 'form-control'}),
+        }
+
 
 class subcatg(forms.ModelForm):
     

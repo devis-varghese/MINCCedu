@@ -25,11 +25,11 @@ class timeAdmin(admin.StackedInline):
 
 class videoAdmin(admin.StackedInline):
     model = video
- 
+
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     inlines = [CuricullamAdmin,timeAdmin, videoAdmin]
- 
+
     class Meta:
        model = Post
 
