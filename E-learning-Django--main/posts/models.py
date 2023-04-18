@@ -44,6 +44,7 @@ class JobApplication(models.Model):
     date_applied = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=(
         ('pending', 'Pending'),
+        ('interviewscheduled', 'Interviewscheduled'),
         ('accepted', 'Accepted'),
         ('rejected', 'Rejected')
     ))
@@ -52,7 +53,19 @@ class JobApplication(models.Model):
         return f"{self.name} - {self.date_applied}"
 
 
+class Vacancy(models.Model):
+    STATUS_CHOICES = [
+        ('available', 'Available'),
+        ('unavailable', 'Unavailable'),
+    ]
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='unavailable')
+    created_at = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        verbose_name_plural = 'Vacancies'
+
+    def __str__(self):
+        return f'Vacancy {self.pk} - {self.status}'
 
 class Tutor(models.Model):
     job_application = models.ForeignKey(JobApplication, on_delete=models.CASCADE)
