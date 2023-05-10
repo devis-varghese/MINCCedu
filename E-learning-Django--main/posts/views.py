@@ -259,6 +259,9 @@ def search(request):
 def videos(request):
     return render(request, 'core/videos.html')
 
+def vr_mode(request):
+    return render(request, 'core/vr_mode.html')
+
 def courses(request):
     main_course = MainCourse.objects.all()
     context = {'main_course':main_course}
@@ -337,30 +340,124 @@ def signup(request):
     context = {'form':form, 'customerForm':customerForm}
     return render(request, 'users/signup.html', context)
 
+
+
+# def signup(request):
+#     if request.method == 'POST':
+#         username = request.POST.get('username')
+#         first_name = request.POST.get('first_name')
+#         last_name = request.POST.get('last_name')
+#         password1 = request.POST.get('password1')
+#         password2 = request.POST.get('password2')
+#         address = request.POST.get('address')
+#         mobile = request.POST.get('mobile')
+#         profile_pic = request.FILES.get('profile_pic')
+#
+#         # Perform validation on form data
+#         errors = {}
+#         if not username:
+#             errors['username'] = 'Email is required.'
+#         elif User.objects.filter(username=username).exists():
+#             errors['username'] = 'Email is already taken.'
+#         if not first_name:
+#             errors['first_name'] = 'First name is required.'
+#         if not last_name:
+#             errors['last_name'] = 'Last name is required.'
+#         if not password1:
+#             errors['password1'] = 'Password is required.'
+#         elif len(password1) < 8:
+#             errors['password1'] = 'Password must be at least 8 characters long.'
+#         if password1 != password2:
+#             errors['password2'] = 'Passwords do not match.'
+#         if not address:
+#             errors['address'] = 'Address is required.'
+#         if not mobile:
+#             errors['mobile'] = 'Mobile number is required.'
+#         elif len(mobile) != 10:
+#             errors['mobile'] = 'Mobile number must be 10 digits long.'
+#
+#         if errors:
+#             context = {'errors': errors, 'form_data': request.POST}
+#             return render(request, 'users/signup.html', context)
+#
+#         # Create the new User and enrolledstudents objects
+#         user = User.objects.create_user(username=username, password=password1, first_name=first_name,
+#                                         last_name=last_name)
+#         user.email = username
+#         user.save()
+#         customer = enrolledstudents.objects.create(user=user, address=address, mobile=mobile, profile_pic=profile_pic)
+#
+#         # Add the user to the CUSTOMER group
+#         my_customer_group = Group.objects.get_or_create(name='CUSTOMER')
+#         my_customer_group[0].user_set.add(user)
+#
+#         # Send account verification email
+#         email = user.email
+#         messages.success(request, 'Thank you for registering with us.')
+#         messages.success(request, 'Please verify your email for login!')
+#
+#         current_site = get_current_site(request)
+#         message = render_to_string('core/account_verification_email.html', {
+#             'user': user,
+#             'domain': current_site,
+#             'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+#             'token': default_token_generator.make_token(user),
+#         })
+#
+#         send_mail(
+#             'Please activate your account',
+#             message,
+#             'minccedu@gmail.com',
+#             [email],
+#             fail_silently=False,
+#         )
+#
+#         return redirect('/login/?command=verification&email=' + email)
+#
+#     return render(request, 'users/signup.html')
+
+
 # UserSignup Form
+# def login(request):
+#     if request.method == 'GET':
+#         form = Customerloginform() #This comes from forms.py
+#         next_page = request.GET.get('next') #If url has next value so this function will redirect the user on next page url
+#         context = {'form':form}
+#         return render(request, 'users/login.html', context)
+#     else:
+#         form = Customerloginform(data=request.POST) #This comes from forms.py
+#         if form.is_valid():
+#             username = form.cleaned_data.get('username')
+#             password = form.cleaned_data.get('password')
+#             user = authenticate(username=username, password=password)
+#             if user:
+#                 loginUser(request, user) #We use loginUser here because yaha 2 login ho gye hai to alag se import kiya hai isko humne
+#             # messages.success(request, "Welcome Sir")
+#             #If url has next value so this function will redirect the user on next page url
+#             if 'next' in request.POST:
+#                 return redirect(request.POST.get('next'))
+#             else:
+#                 return redirect('userhome')
+#         else:
+#             context = {'form':form}
+#             return render(request, 'users/login.html', context)
+
+
 def login(request):
     if request.method == 'GET':
-        form = Customerloginform() #This comes from forms.py
-        next_page = request.GET.get('next') #If url has next value so this function will redirect the user on next page url                
-        context = {'form':form}
+        context = {}
         return render(request, 'users/login.html', context)
     else:
-        form = Customerloginform(data=request.POST) #This comes from forms.py
-        if form.is_valid():
-            username = form.cleaned_data.get('username')    
-            password = form.cleaned_data.get('password')    
-            user = authenticate(username=username, password=password)
-            if user:
-                loginUser(request, user) #We use loginUser here because yaha 2 login ho gye hai to alag se import kiya hai isko humne
-            # messages.success(request, "Welcome Sir")
-            #If url has next value so this function will redirect the user on next page url
-            if 'next' in request.POST:
-                return redirect(request.POST.get('next'))
-            else:        
-                return redirect('userhome')  
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
+        if user:
+            loginUser(request, user)
+            return redirect('home')
         else:
-            context = {'form':form}
+            context = {}
             return render(request, 'users/login.html', context)
+
 
 
 def logout(request):

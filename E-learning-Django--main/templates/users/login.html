@@ -43,20 +43,29 @@
                <h3>Username</h3>
                <p>Your username must contain 6 or more characters.</p>
 
-               <form method='post'>
-               {% csrf_token %}
-               {{form|crispy}}
-               {% if request.GET.next %}
-               <input type="hidden" name="next" value="{{request.GET.next}}">
-               {% endif %}
-          <button type="submit" class="btn btn-outline-primary">Submit</button>
-           
-               </form>
+<!--               <form method='post'>-->
+<!--               {% csrf_token %}-->
+<!--               {{form|crispy}}-->
+<!--               {% if request.GET.next %}-->
+<!--               <input type="hidden" name="next" value="{{request.GET.next}}">-->
+<!--               {% endif %}-->
+<!--          <button type="submit" class="btn btn-outline-primary">Submit</button>-->
+<!--           -->
+<!--               </form>-->
+                 <form method="post">
+                 {% csrf_token %}
+                 <label for="id_username">Email:</label>
+                    <input type="email" name="username" id="id_username" required>
+
+                        <label for="id_password">Password:</label>
+                    <input type="password" name="password" id="id_password" required>
+
+                 <button type="submit" id="submit" class="btn btn-outline-primary">Submit</button>
+                 </form>
               
           </div>
            </div>
 
-            
               
            </div>
          </div>
